@@ -10,7 +10,16 @@
                     "name": "Walking",
                     "type": "PassThrough",
                     "id": "89324d66-25e7-41e5-b353-3d4e39b6e982",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JumpIng",
+                    "type": "Button",
+                    "id": "958316e7-7666-48bc-9a7b-18f4b7b46c2d",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -18,9 +27,9 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "c4cc4cb9-d11f-453f-a6c8-466c3d331ff9",
-                    "path": "2DVector",
+                    "name": "3D Vector",
+                    "id": "e64f3ab6-1fcd-47b6-9711-b55c4fe49db1",
+                    "path": "3DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -30,8 +39,8 @@
                 },
                 {
                     "name": "up",
-                    "id": "d0208a02-cb19-4b30-92a2-ec2bb03981f4",
-                    "path": "",
+                    "id": "d87a7ac3-d641-441c-86cd-59fdf094d14e",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -41,8 +50,8 @@
                 },
                 {
                     "name": "down",
-                    "id": "2581fc59-c39d-409a-a229-476babe57513",
-                    "path": "",
+                    "id": "1a403d5a-147e-48a4-b37b-501f03363ab8",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -52,8 +61,8 @@
                 },
                 {
                     "name": "left",
-                    "id": "4f5b2acc-6587-457f-9c9e-597670cc0d04",
-                    "path": "",
+                    "id": "d62ce8fd-11a4-4199-bd2f-1adb1ea695a0",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -63,14 +72,47 @@
                 },
                 {
                     "name": "right",
-                    "id": "5bcabbbe-48f8-49e4-8142-ffb698c4fcf2",
-                    "path": "",
+                    "id": "f285f752-bf56-4677-9fd6-0a3c9d13d8d1",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Walking",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "forward",
+                    "id": "57c0c9a4-dad3-470e-9f5f-30d9ea71bb30",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walking",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "backward",
+                    "id": "ca153ff3-0636-48ea-ae2d-cf9ef73a9fbe",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walking",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "935e1137-c17e-46cd-bee8-90890da494e4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpIng",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

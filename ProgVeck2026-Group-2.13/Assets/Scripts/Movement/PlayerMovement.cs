@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,32 +11,48 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Input Ref")]
     public InputActionReference move;
+    public InputActionReference jump;
     [Header("Movement Settings")]
     public float moveSpeed;
-    public float upForce;
-    public float cloudSlow;
+    public float jumpPower;
     [Header("TouchingGround bool")]
     public LayerMask groundMask;
     public Transform groundCheckPoint;
-    private Rigidbody2D _rb;
+    private Rigidbody _rb;
     [SerializeField]
-    private Vector2 _moveDir;
+    private Vector3 _moveDir;
+    [SerializeField]
+    bool isJumping = false;
 
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-    } 
-    void FixedUpdate()
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
     {
-        Vector2 velocity = new Vector2(_rb.linearVelocity.x,_rb.linearVelocity.y);
-        
-        velocity = new Vector2(_moveDir.x * moveSpeed, _rb.linearVelocity.y);
-        
+        Vector3 temp = move.action.ReadValue<Vector3>();
+        _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
+        if (jump.action.IsPressed() && TouchingGround())
+            isJumping = true;
+        else
+            isJumping = false;
+    }
+    void FixedUpdate()
+    {     
+        Vector3 velocity = new Vector3(_moveDir.x, _moveDir.y, _moveDir.z);
+        if (isJumping)
+            velocity.y = jumpPower;
         _rb.linearVelocity = velocity;
 
     }
     public bool TouchingGround()
     {
-        return Physics2D.OverlapCircle(groundCheckPoint.position, .5f, groundMask);
+        return Physics.OverlapSphere(
+            groundCheckPoint.position,
+            0.5f,
+            groundMask
+        ).Length > 0;
     }
+
 }

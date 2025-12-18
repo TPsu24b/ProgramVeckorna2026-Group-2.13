@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -14,31 +15,45 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference jump;
     [Header("Movement Settings")]
     public float moveSpeed;
-    public float jumpPower;
     [Header("TouchingGround bool")]
     public LayerMask groundMask;
     public Transform groundCheckPoint;
     private Rigidbody _rb;
     [SerializeField]
     private Vector3 _moveDir;
-    [SerializeField]
-    bool isJumping = false;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
     }
-
+    [Header("Jumping Settings")]
+    public float jumpPower;
+    [SerializeField]
+    float jumpCooldown = 0.2f;
+    float timer;
+    [SerializeField]
+    bool isJumping = false;
+    [SerializeField]
+    bool canJump = true;
     void Update()
     {
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
-        if (jump.action.IsPressed())
+
+        if (!canJump)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                canJump = true;
+            }
+        }
+        if (jump.action.IsPressed() && canJump)
         {
             if(TouchingGround())
             {
-                isJumping = true;
                 Debug.Log($"{this}: Jumping");
+                isJumping = true;
             }
             else if(Climbing())
             {
@@ -48,14 +63,25 @@ public class PlayerMovement : MonoBehaviour
             else
                 isJumping = false;
         }
+        else if(jump.action.WasReleasedThisFrame())
+        {
+            canJump = false;
+            timer = jumpCooldown;
+        }
         else
             isJumping = false;
+        
     }
     void FixedUpdate()
     {     
         Vector3 velocity = new Vector3(_moveDir.x, _moveDir.y, _moveDir.z);
         if (isJumping)
             velocity.y = jumpPower;
+        if(Climbing())
+        {
+            velocity.y *= climbingSlow;
+            Debug.Log($"{this}: slow climb");
+        }
         _rb.linearVelocity = velocity;
 
     }
@@ -67,21 +93,24 @@ public class PlayerMovement : MonoBehaviour
             groundMask
         ).Length > 0;
     }
+    [Header("Climbing settings")]
     [SerializeField]
-    float height, touchingRadius;
+    float height, climbingSlow;
+    [SerializeField]
+    Vector3 boxSize;
     public bool Climbing()
     {
-        return Physics.OverlapCapsule(
+        return Physics.OverlapBox(
             new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z),
-            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - height, gameObject.transform.position.z),
-            touchingRadius,
+            boxSize,
+            transform.rotation,
             groundMask
         ).Length > 0;
     }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), touchingRadius);
+        Gizmos.DrawWireCube(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), boxSize);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundCheckPoint.position, 0.25f);
     }

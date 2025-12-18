@@ -1,8 +1,8 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,10 +33,27 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
-        if (jump.action.IsPressed() && TouchingGround())
-            isJumping = true;
+        if (jump.action.IsPressed())
+        {
+            if(TouchingGround())
+            {
+                isJumping = true;
+                Debug.Log($"{this}: Jumping");
+            }
+            else if(TouchingLeft())
+            {
+                Debug.Log($"{this}: Left Climb");
+                isJumping = true;
+            }
+            else if(TouchingRight())
+            {
+                Debug.Log($"{this}: Right Climb");
+                isJumping = true;
+            }
+        }
         else
             isJumping = false;
+        
     }
     void FixedUpdate()
     {     
@@ -50,9 +67,36 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics.OverlapSphere(
             groundCheckPoint.position,
-            0.5f,
+            0.25f,
             groundMask
         ).Length > 0;
+    }
+    [SerializeField]
+    float touchingDistance, touchingRadius;
+    public bool TouchingLeft()
+    {
+        return Physics.OverlapSphere(
+            new Vector3(gameObject.transform.position.x - touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z),
+            touchingRadius,
+            groundMask
+        ).Length > 0;
+    }
+    public bool TouchingRight()
+    {
+        return Physics.OverlapSphere(
+            new Vector3(gameObject.transform.position.x + touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z),
+            touchingRadius,
+            groundMask
+        ).Length > 0;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(new Vector3(gameObject.transform.position.x + touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z), touchingRadius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(new Vector3(gameObject.transform.position.x - touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z), touchingRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(groundCheckPoint.position, 0.25f);
     }
 
 }

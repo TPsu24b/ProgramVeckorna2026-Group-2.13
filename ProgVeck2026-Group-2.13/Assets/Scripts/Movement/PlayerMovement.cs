@@ -40,14 +40,9 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = true;
                 Debug.Log($"{this}: Jumping");
             }
-            else if(TouchingLeft())
+            else if(Climbing())
             {
-                Debug.Log($"{this}: Left Climb");
-                isJumping = true;
-            }
-            else if(TouchingRight())
-            {
-                Debug.Log($"{this}: Right Climb");
+                Debug.Log($"{this}: Climbing");
                 isJumping = true;
             }
             else
@@ -55,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             isJumping = false;
-        
     }
     void FixedUpdate()
     {     
@@ -74,19 +68,12 @@ public class PlayerMovement : MonoBehaviour
         ).Length > 0;
     }
     [SerializeField]
-    float touchingDistance, touchingRadius;
-    public bool TouchingLeft()
+    float height, touchingRadius;
+    public bool Climbing()
     {
-        return Physics.OverlapSphere(
-            new Vector3(gameObject.transform.position.x - touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z),
-            touchingRadius,
-            groundMask
-        ).Length > 0;
-    }
-    public bool TouchingRight()
-    {
-        return Physics.OverlapSphere(
-            new Vector3(gameObject.transform.position.x + touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z),
+        return Physics.OverlapCapsule(
+            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z),
+            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - height, gameObject.transform.position.z),
             touchingRadius,
             groundMask
         ).Length > 0;
@@ -94,9 +81,7 @@ public class PlayerMovement : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector3(gameObject.transform.position.x + touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z), touchingRadius);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(new Vector3(gameObject.transform.position.x - touchingDistance, gameObject.transform.position.y, gameObject.transform.position.z), touchingRadius);
+        Gizmos.DrawWireSphere(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), touchingRadius);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundCheckPoint.position, 0.25f);
     }

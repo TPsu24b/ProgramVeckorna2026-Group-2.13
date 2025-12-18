@@ -61,16 +61,23 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = true;
             }
             else
+            {
                 isJumping = false;
+                JumpCoolDown();
+            }
         }
         else if(jump.action.WasReleasedThisFrame())
         {
-            canJump = false;
-            timer = jumpCooldown;
+            JumpCoolDown();
         }
         else
             isJumping = false;
         
+    }
+    void JumpCoolDown()
+    {
+        canJump = false;
+        timer = jumpCooldown;
     }
     void FixedUpdate()
     {     

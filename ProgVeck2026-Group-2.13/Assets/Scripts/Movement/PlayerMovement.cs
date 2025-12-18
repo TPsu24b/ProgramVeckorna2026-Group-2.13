@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log($"{this}: Right Climb");
                 isJumping = true;
             }
+            else
+                isJumping = false;
         }
         else
             isJumping = false;

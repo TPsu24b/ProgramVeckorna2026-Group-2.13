@@ -9,7 +9,15 @@ public class EnemyStats : ScriptableObject
     AttackType[] attackTypes;
     public void LoadResources()
     {
-        attackTypes = Resources.LoadAll<AttackType>(resourcesDirectory);
+        try
+        {
+            attackTypes = Resources.LoadAll<AttackType>(resourcesDirectory);
+            Debug.Log($"{this}: loaded resourses at {resourcesDirectory}");
+        }
+        catch
+        {
+            Debug.Log($"{this}: Failed to load resources type <AttackType> at {resourcesDirectory}");
+        }
     }
     public int GetHealth()
     {   return health;  }

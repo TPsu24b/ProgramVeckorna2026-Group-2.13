@@ -92,11 +92,12 @@ public class PlayerMovement : MonoBehaviour
         _rb.linearVelocity = velocity;
 
     }
+    
     public bool TouchingGround()
     {
         return Physics.OverlapSphere(
             groundCheckPoint.position,
-            0.25f,
+            0.35f,
             groundMask
         ).Length > 0;
     }
@@ -119,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), boxSize);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(groundCheckPoint.position, 0.25f);
+        Gizmos.DrawWireSphere(groundCheckPoint.position, 0.35f);
     }
 
 }

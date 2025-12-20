@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61251363d54b785429a1b3812eaa0b10, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  health: 0
-  speed: 0
-  resourcesDirectory: 
+  health: 1000
+  speed: 5
+  resourcesDirectory: Enemies/Boss1

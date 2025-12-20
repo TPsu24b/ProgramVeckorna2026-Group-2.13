@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Input Ref")]
     public InputActionReference move;
     public InputActionReference jump;
+    public InputActionReference crouching;
     [Header("Movement Settings")]
     public float moveSpeed;
     [Header("TouchingGround bool")]
@@ -39,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
-
         if (!canJump)
         {
             timer -= Time.deltaTime;
@@ -48,7 +48,12 @@ public class PlayerMovement : MonoBehaviour
                 canJump = true;
             }
         }
-        if (jump.action.IsPressed() && canJump)
+        if(crouching.action.IsPressed() && TouchingGround())
+        {
+            Debug.Log($"{this}: Crouching");
+            
+        }
+        else if (jump.action.IsPressed() && canJump)
         {
             if(TouchingGround())
             {
@@ -121,6 +126,10 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), boxSize);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundCheckPoint.position, 0.35f);
+    }
+    void ToggleMovment(bool state)
+    {
+        this.enabled = state;
     }
 
 }

@@ -340,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   move: {fileID: 1129276562}
   jump: {fileID: 1595449358}
+  crouching: {fileID: 1280878420}
   moveSpeed: 5
   groundMask:
     serializedVersion: 2
@@ -953,6 +954,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 7cd8f6240857122488dc2daed8f837f6, type: 3}
   m_ActionId: 89324d66-25e7-41e5-b353-3d4e39b6e982
+--- !u!114 &1280878420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Movment/Croucing
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 7cd8f6240857122488dc2daed8f837f6, type: 3}
+  m_ActionId: d1c905a4-329a-4544-8e33-31a66654aa6d
 --- !u!1 &1293920698
 GameObject:
   m_ObjectHideFlags: 0

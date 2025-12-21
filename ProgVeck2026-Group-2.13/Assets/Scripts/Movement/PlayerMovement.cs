@@ -44,9 +44,9 @@ public class PlayerMovement : MonoBehaviour
             _rb = GetComponent<Rigidbody>();
             Debug.Log($"{this}: Loaded RB");
         }
-        catch
+        catch(Exception error)
         {
-            Debug.Log($"{this}: Failed to load RB");
+            Debug.Log($"{this}: Failed to load RB\nReason: {error}");
         }
     }
     void Update()
@@ -125,21 +125,21 @@ public class PlayerMovement : MonoBehaviour
         _rb.linearVelocity = velocity;
 
     }
-    /*creates a shpere on the gameObject GroundCheakPoint
-    also cheaks if it collies with the layer in GroundMask*/
     public bool TouchingGround()
     {
+        /*creates a shpere on the gameObject GroundCheakPoint
+        also cheaks if it collies with the layer in GroundMask*/
         return Physics.OverlapSphere(
             groundCheckPoint.position,
             0.35f,
             groundMask
         ).Length > 0;
     }
-    /*creats a box inside of the player with a custom height
-    the size of the box is a vector3 with the var boxSize
-    cheacks for collisions on the layermask groundMask*/
     public bool Climbing()
     {
+        /*creats a box inside of the player with a custom height
+        the size of the box is a vector3 with the var boxSize
+        cheacks for collisions on the layermask groundMask*/
         return Physics.OverlapBox(
             new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z),
             boxSize,
@@ -147,9 +147,9 @@ public class PlayerMovement : MonoBehaviour
             groundMask
         ).Length > 0;
     }
-    //a toggle for this script, as requested of alec
     void ToggleMovment(bool state)
     {
+        //a toggle for this script, as requested of alec
         this.enabled = state;
     }
     //draws the touchingGround and Climbing bools for ease of understanding and use

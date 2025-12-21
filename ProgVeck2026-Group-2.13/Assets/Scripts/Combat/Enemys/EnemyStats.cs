@@ -1,3 +1,5 @@
+using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 [CreateAssetMenu]
 public class EnemyStats : ScriptableObject
@@ -15,9 +17,9 @@ public class EnemyStats : ScriptableObject
             attackTypes = Resources.LoadAll<AttackType>(resourcesDirectory);
             Debug.Log($"{this}: loaded resourses at {resourcesDirectory}");
         }
-        catch
+        catch(Exception error)
         {
-            Debug.Log($"{this}: Failed to load resources type <AttackType> at {resourcesDirectory}");
+            Debug.Log($"{this}: Failed to load resources type <AttackType> at {resourcesDirectory}\nReason: {error}");
         }
     }
     public int GetHealth()

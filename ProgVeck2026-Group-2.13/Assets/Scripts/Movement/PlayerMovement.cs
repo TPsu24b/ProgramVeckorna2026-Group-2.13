@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     bool isJumping = false;
     [SerializeField]
-    bool canJump = true;
+    bool jumpTimerActive = true;
 
     [Header("Climbing settings")]
     [SerializeField]
@@ -49,12 +49,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
         //if cooldown is active reduce time remaining
-        if (!canJump)
+        if (!jumpTimerActive)
         {
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
-                canJump = true;
+                jumpTimerActive = true;
             }
         }
         //if courching and on ground crouch
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
             
         }
         //if space is pressed and jump cooldown isent active
-        else if (jump.action.IsPressed() && canJump)
+        else if (jump.action.IsPressed() && jumpTimerActive)
         {
             //jump
             if(TouchingGround())
@@ -81,24 +81,22 @@ public class PlayerMovement : MonoBehaviour
             //stop jumping
             else
             {
+                Debug.Log($"{this}: Stop jumping");
+                if(isJumping)
+                    JumpCoolDown();
                 isJumping = false;
-                JumpCoolDown();
             }
-        }
-        //stop jumping
-        else if(jump.action.WasReleasedThisFrame())
-        {
-            JumpCoolDown();
         }
         //if not jumping 
         else
             isJumping = false;
+
         
     }
     //activate jump cooldown
     void JumpCoolDown()
     {
-        canJump = false;
+        jumpTimerActive = false;
         timer = jumpCooldown;
     }
     void FixedUpdate()

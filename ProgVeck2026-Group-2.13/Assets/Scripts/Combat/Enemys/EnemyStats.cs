@@ -3,10 +3,11 @@ using UnityEngine;
 public class EnemyStats : ScriptableObject
 {
     [SerializeField]
-    int health, speed;
+    int health, movmentSpeed;
     [SerializeField]
     string resourcesDirectory;
     AttackType[] attackTypes;
+    //loads attackTypes out of the resources folder
     public void LoadResources()
     {
         try
@@ -21,6 +22,6 @@ public class EnemyStats : ScriptableObject
     }
     public int GetHealth()
     {   return health;  }
-    public int GetSpeed()
-    {   return speed;  }
+    public int GetMovmentSpeed()
+    {   return movmentSpeed;  }
 }

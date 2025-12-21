@@ -22,11 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     [SerializeField]
     private Vector3 _moveDir;
-
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
     [Header("Jumping Settings")]
     public float jumpPower;
     [SerializeField]
@@ -36,10 +31,30 @@ public class PlayerMovement : MonoBehaviour
     bool isJumping = false;
     [SerializeField]
     bool canJump = true;
+
+    [Header("Climbing settings")]
+    [SerializeField]
+    float height, climbingSlow;
+    [SerializeField]
+    Vector3 boxSize;
+    void Start()
+    {
+        try
+        {
+            _rb = GetComponent<Rigidbody>();
+            Debug.Log($"{this}: Loaded RB");
+        }
+        catch
+        {
+            Debug.Log($"{this}: Failed to load RB");
+        }
+    }
     void Update()
     {
+        //read the wasd input, convert it into a vector3 used for velocity later
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
+        //if cooldown is active reduce time remaining
         if (!canJump)
         {
             timer -= Time.deltaTime;
@@ -48,37 +63,45 @@ public class PlayerMovement : MonoBehaviour
                 canJump = true;
             }
         }
+        //if courching and on ground crouch
         if(crouching.action.IsPressed() && TouchingGround())
         {
             Debug.Log($"{this}: Crouching");
             
         }
+        //if space is pressed and jump cooldown isent active
         else if (jump.action.IsPressed() && canJump)
         {
+            //jump
             if(TouchingGround())
             {
                 Debug.Log($"{this}: Jumping");
                 isJumping = true;
             }
+            //climb
             else if(Climbing())
             {
                 Debug.Log($"{this}: Climbing");
                 isJumping = true;
             }
+            //stop jumping
             else
             {
                 isJumping = false;
                 JumpCoolDown();
             }
         }
+        //stop jumping
         else if(jump.action.WasReleasedThisFrame())
         {
             JumpCoolDown();
         }
+        //if not jumping 
         else
             isJumping = false;
         
     }
+    //activate jump cooldown
     void JumpCoolDown()
     {
         canJump = false;
@@ -86,18 +109,24 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {     
+        //addd moveDir to a new vector
         Vector3 velocity = new Vector3(_moveDir.x, _moveDir.y, _moveDir.z);
+        //if jumping make velocity.y jump power
         if (isJumping)
             velocity.y = jumpPower;
+        /*if climbing change the velocity.y by the slow 0>x>1
+        because climbing can only happen when jumping it is bassicaly jumpPower*climbingSlow*/
         if(Climbing())
         {
             velocity.y *= climbingSlow;
             Debug.Log($"{this}: slow climb");
         }
+        //apply new velocity
         _rb.linearVelocity = velocity;
 
     }
-    
+    /*creates a shpere on the gameObject GroundCheakPoint
+    also cheaks if it collies with the layer in GroundMask*/
     public bool TouchingGround()
     {
         return Physics.OverlapSphere(
@@ -106,11 +135,9 @@ public class PlayerMovement : MonoBehaviour
             groundMask
         ).Length > 0;
     }
-    [Header("Climbing settings")]
-    [SerializeField]
-    float height, climbingSlow;
-    [SerializeField]
-    Vector3 boxSize;
+    /*creats a box inside of the player with a custom height
+    the size of the box is a vector3 with the var boxSize
+    cheacks for collisions on the layermask groundMask*/
     public bool Climbing()
     {
         return Physics.OverlapBox(
@@ -120,16 +147,18 @@ public class PlayerMovement : MonoBehaviour
             groundMask
         ).Length > 0;
     }
+    //a toggle for this script, as requested of alec
+    void ToggleMovment(bool state)
+    {
+        this.enabled = state;
+    }
+    //draws the touchingGround and Climbing bools for ease of understanding and use
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), boxSize);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundCheckPoint.position, 0.35f);
-    }
-    void ToggleMovment(bool state)
-    {
-        this.enabled = state;
     }
 
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttackType : ScriptableObject
 {
     [SerializeField]
-    int damage;
+    int damage, linger;
     [SerializeField]
     GameObject hitbox;
     

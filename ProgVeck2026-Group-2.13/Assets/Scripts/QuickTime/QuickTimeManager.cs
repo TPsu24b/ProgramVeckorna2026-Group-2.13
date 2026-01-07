@@ -11,11 +11,10 @@ public class QuickTimeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        QTMannager();
     }
-
-    // Update is called once per frame
-    void Update()
+    //loop for qt
+    void QTMannager()
     {
         
     }

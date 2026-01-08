@@ -10,12 +10,12 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference crouching;
     [Header("Movement Settings")]
     public float moveSpeed;
+    [SerializeField]
+    private Vector3 _moveDir;
     [Header("TouchingGround bool")]
     public LayerMask groundMask;
     public Transform groundCheckPoint;
     private Rigidbody _rb;
-    [SerializeField]
-    private Vector3 _moveDir;
     [Header("Jumping Settings")]
     public float jumpPower;
     [SerializeField]

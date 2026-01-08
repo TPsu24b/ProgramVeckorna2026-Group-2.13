@@ -9,10 +9,4 @@ public class Boss : MonoBehaviour
     {
         stats.LoadResources();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -57,41 +57,6 @@ public class PlayerMovement : MonoBehaviour
                 jumpTimerActive = true;
             }
         }
-        //if courching and on ground crouch
-        if(crouching.action.IsPressed() && TouchingGround())
-        {
-            Debug.Log($"{this}: Crouching");
-            
-        }
-        //if space is pressed and jump cooldown isent active
-        else if (jump.action.IsPressed() && jumpTimerActive)
-        {
-            //jump
-            if(TouchingGround())
-            {
-                Debug.Log($"{this}: Jumping");
-                isJumping = true;
-            }
-            //climb
-            else if(Climbing())
-            {
-                Debug.Log($"{this}: Climbing");
-                isJumping = true;
-            }
-            //stop jumping
-            else
-            {
-                Debug.Log($"{this}: Stop jumping");
-                if(isJumping)
-                    JumpCoolDown();
-                isJumping = false;
-            }
-        }
-        //if not jumping 
-        else
-            isJumping = false;
-
-        
     }
     //activate jump cooldown
     void JumpCoolDown()
@@ -101,6 +66,49 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {     
+            
+        isGrounded = CheakGround();
+        isClimbing = CheakClimbing();
+        //if courching and on ground crouch
+        if(crouching.action.IsPressed() && isGrounded)
+        {
+            #if UNITY_EDITOR
+            Debug.Log($"{this}: Crouching");
+            #endif
+        }
+        //if space is pressed and jump cooldown isent active
+        else if (jump.action.IsPressed() && jumpTimerActive)
+        {
+            //jump
+            if(isGrounded)
+            {
+                #if UNITY_EDITOR
+                Debug.Log($"{this}: Jumping");
+                #endif
+                isJumping = true;
+            }
+            //climb
+            else if(isClimbing)
+            {
+                #if UNITY_EDITOR
+                Debug.Log($"{this}: Climbing");
+                #endif
+                isJumping = true;
+            }
+            //stop jumping
+            else
+            {
+                #if UNITY_EDITOR
+                Debug.Log($"{this}: Stop jumping");
+                #endif
+                if(isJumping)
+                    JumpCoolDown();
+                isJumping = false;
+            }
+        }
+        //if not jumping 
+        else
+            isJumping = false;
         //addd moveDir to a new vector
         Vector3 velocity = new Vector3(_moveDir.x, _moveDir.y, _moveDir.z);
         //if jumping make velocity.y jump power
@@ -108,16 +116,20 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = jumpPower;
         /*if climbing change the velocity.y by the slow 0>x>1
         because climbing can only happen when jumping it is bassicaly jumpPower*climbingSlow*/
-        if(Climbing())
+        if(isClimbing)
         {
             velocity.y *= climbingSlow;
+            #if UNITY_EDITOR
             Debug.Log($"{this}: slow climb");
+            #endif
         }
         //apply new velocity
         _rb.linearVelocity = velocity;
-
     }
-    public bool TouchingGround()
+    bool isGrounded;
+    bool isClimbing;
+
+    public bool CheakGround()
     {
         /*creates a shpere on the gameObject GroundCheakPoint
         also cheaks if it collies with the layer in GroundMask*/
@@ -127,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
             groundMask
         ).Length > 0;
     }
-    public bool Climbing()
+    public bool CheakClimbing()
     {
         /*creats a box inside of the player with a custom height
         the size of the box is a vector3 with the var boxSize

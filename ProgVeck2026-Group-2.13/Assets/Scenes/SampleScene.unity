@@ -356,11 +356,11 @@ MonoBehaviour:
   jump: {fileID: 1595449358}
   crouching: {fileID: 1280878420}
   moveSpeed: 5
+  _moveDir: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
   groundCheckPoint: {fileID: 1293920699}
-  _moveDir: {x: 0, y: 0, z: 0}
   jumpPower: 5
   jumpCooldown: 0.5
   isJumping: 0

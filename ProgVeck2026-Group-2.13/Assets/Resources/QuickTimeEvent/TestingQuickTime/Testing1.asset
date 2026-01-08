@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Testing1
   m_EditorClassIdentifier: Assembly-CSharp::QuickTimeList
   quickTimeEvents:
-  - {fileID: 11400000, guid: 0c8bd67c34b1a174590715a0d30caf3d, type: 2}
-  - {fileID: 11400000, guid: 7cb9d6c87216c5948a849ea7ebe912e6, type: 2}
-  - {fileID: 11400000, guid: f611a7279bf39c54aaeac91308eb6002, type: 2}
-  - {fileID: 11400000, guid: ed943e6294a21fb4cab454dc81cdc803, type: 2}
-  - {fileID: 11400000, guid: e2c5adfeb05d58a429189dccdb80c9c7, type: 2}
-  - {fileID: 11400000, guid: f105b489b26b2dd499aa2a7396aad88d, type: 2}
+  - lifeTime: 2
+    keyToPress: 1
+    delay: 0
+    position: {x: 585, y: 247, z: 0}

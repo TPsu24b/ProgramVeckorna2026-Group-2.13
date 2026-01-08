@@ -1,13 +1,17 @@
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EventPrefab : MonoBehaviour
 {
     //the sizes for the timer
     private Vector3 startScale, endScale = new Vector3(0.75f, 0.75f, 0.75f);
+    [SerializeField]
+    float pressZoneScale;
     public float shrinkDuration = 2f;
     private float elapsedTime;
     public Transform toShrink;
+    public InputActionReference inputAction;
     void Start()
     {
         startScale = toShrink.localScale;
@@ -23,7 +27,33 @@ public class EventPrefab : MonoBehaviour
         if (t >= 1f)
         {
             Debug.Log($"{this}: QT finished");
-            Destroy(gameObject);
+            Destroy(transform.parent);
         }
+        if(inputAction.action.IsPressed())
+        ButtonPressed();
+    }
+    public void ButtonPressed()
+    {
+        bool b = QuickTimeEventMissedOrHit();
+        if(b)
+        {
+            transform.parent.GetComponent<EventManager>().UpdateCompletedEvents(1);
+        }
+        else
+            transform.parent.GetComponent<EventManager>().UpdateCompletedEvents(-1);
+    }
+    public bool QuickTimeEventMissedOrHit()
+    {
+        if(toShrink.localScale.x <= pressZoneScale)
+        {
+            Debug.Log($"{this}: Green zone");
+            return true;
+        }
+        else if(toShrink.localScale.x >= pressZoneScale)
+        {
+            Debug.Log($"{this}: RED zone");
+            return false;
+        }
+        return false;
     }
 }

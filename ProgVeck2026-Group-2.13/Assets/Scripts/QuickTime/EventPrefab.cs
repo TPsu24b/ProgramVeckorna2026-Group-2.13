@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,7 @@ public class EventPrefab : MonoBehaviour
     private float elapsedTime;
     public Transform toShrink;
     public InputActionReference inputAction;
+    public TextMeshProUGUI text;
     void Start()
     {
         startScale = toShrink.localScale;
@@ -28,11 +30,11 @@ public class EventPrefab : MonoBehaviour
         if (t >= 1f)
         {
             Debug.Log($"{this}: QT finished");
-            Destroy(gameObject);
             manager.UpdateCompletedEvents(-1);
+            Destroy(gameObject);
         }
         if(inputAction.action.IsPressed())
-        ButtonPressed();
+            ButtonPressed();
     }
     EventManager manager;
     public void ButtonPressed()
@@ -42,20 +44,26 @@ public class EventPrefab : MonoBehaviour
         {
             manager.UpdateCompletedEvents(1);
         }
-        else
+        else if(!b)
+        {
             manager.UpdateCompletedEvents(-1);
+        }
+        Destroy(gameObject);
     }
     public bool QuickTimeEventMissedOrHit()
     {
-        if(toShrink.localScale.x <= pressZoneScale)
+        if(toShrink != null)
         {
-            Debug.Log($"{this}: Green zone");
-            return true;
-        }
-        else if(toShrink.localScale.x >= pressZoneScale)
-        {
-            Debug.Log($"{this}: RED zone");
-            return false;
+            if(toShrink.localScale.x <= pressZoneScale)
+            {
+                Debug.Log($"{this}: Green zone");
+                return true;
+            }
+            else if(toShrink.localScale.x >= pressZoneScale)
+            {
+                Debug.Log($"{this}: RED zone");
+                return false;
+            }
         }
         return false;
     }

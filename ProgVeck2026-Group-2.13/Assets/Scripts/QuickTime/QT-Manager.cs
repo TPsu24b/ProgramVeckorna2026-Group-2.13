@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -17,7 +18,9 @@ public class EventManager : MonoBehaviour
     int eventsCompleted;
     [SerializeField]
     PlayerInput player;
+    public List<EventPrefab> activeEvents = new List<EventPrefab>();
     //loop for qt
+
     public IEnumerator QTMannager()
     {
         player.SwitchCurrentActionMap("QuickTime");
@@ -27,6 +30,8 @@ public class EventManager : MonoBehaviour
             newEvent.transform.localPosition = quickTimeEvent.position;
             newEvent.shrinkDuration = quickTimeEvent.lifeTime;
             newEvent.inputAction = inputActionRef[quickTimeEvent.keyToPress];
+            newEvent.text.text = inputActionRef[quickTimeEvent.keyToPress].action.GetBindingDisplayString();
+            activeEvents.Add(newEvent);
             yield return new WaitForSeconds(quickTimeEvent.delay);
         }
         player.SwitchCurrentActionMap("Movement");

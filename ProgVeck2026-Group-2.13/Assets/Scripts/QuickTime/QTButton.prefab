@@ -475,3 +475,4 @@ MonoBehaviour:
   shrinkDuration: 2
   toShrink: {fileID: 7243631040213632798}
   inputAction: {fileID: 0}
+  text: {fileID: 3330184131475325324}

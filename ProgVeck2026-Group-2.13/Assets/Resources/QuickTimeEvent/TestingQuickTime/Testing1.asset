@@ -14,6 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuickTimeList
   quickTimeEvents:
   - lifeTime: 2
+    keyToPress: 0
+    delay: 2
+    position: {x: 200, y: 100, z: 0}
+  - lifeTime: 2
+    keyToPress: 2
+    delay: 2
+    position: {x: 200, y: 500, z: 0}
+  - lifeTime: 2
     keyToPress: 1
-    delay: 0
+    delay: 2
     position: {x: 585, y: 247, z: 0}
+  - lifeTime: 2
+    keyToPress: 3
+    delay: 2
+    position: {x: 400, y: 300, z: 0}

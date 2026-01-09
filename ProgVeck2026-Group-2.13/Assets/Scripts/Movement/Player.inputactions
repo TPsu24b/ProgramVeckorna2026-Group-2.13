@@ -3,7 +3,7 @@
     "name": "Player",
     "maps": [
         {
-            "name": "Movment",
+            "name": "Movement",
             "id": "85e782cb-9487-4e64-8e63-f8c29641d1f1",
             "actions": [
                 {

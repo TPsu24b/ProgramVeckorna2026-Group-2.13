@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     [SerializeField]
     private Vector3 _moveDir;
+    [SerializeField]
+    bool jumpPressed, crouchPressed;
     [Header("TouchingGround bool")]
     public LayerMask groundMask;
     public Transform groundCheckPoint;
@@ -22,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     float jumpCooldown = 0.2f;
     float timer;
     [SerializeField]
-    bool isJumping = false;
-    [SerializeField]
     bool jumpTimerActive = true;
 
     [Header("Climbing settings")]
@@ -31,18 +32,22 @@ public class PlayerMovement : MonoBehaviour
     float height, climbingSlow;
     [SerializeField]
     Vector3 boxSize;
+    SphereCollider _collider;
+    
     void Start()
     {
         try
         {
+            _collider = GetComponent<SphereCollider>();
             _rb = GetComponent<Rigidbody>();
             Debug.Log($"{this}: Loaded RB");
         }
         catch(Exception error)
         {
-            Debug.Log($"{this}: Failed to load RB\nReason: {error}");
+            Debug.Log($"{this}: Failed to load \nReason: {error}");
         }
     }
+    
     void Update()
     {
         //read the wasd input, convert it into a vector3 used for velocity later
@@ -57,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
                 jumpTimerActive = true;
             }
         }
+        jumpPressed = jump.action.IsPressed();
+        crouchPressed = crouching.action.IsPressed();
     }
     //activate jump cooldown
     void JumpCoolDown()
@@ -64,92 +71,77 @@ public class PlayerMovement : MonoBehaviour
         jumpTimerActive = false;
         timer = jumpCooldown;
     }
+    bool lastCrouchState;
     void FixedUpdate()
     {     
             
         isGrounded = CheakGround();
         isClimbing = CheakClimbing();
         //if courching and on ground crouch
-        if(crouching.action.IsPressed() && isGrounded)
+        if(lastCrouchState != crouchPressed)
         {
-            #if UNITY_EDITOR
-            Debug.Log($"{this}: Crouching");
-            #endif
+            if(crouchPressed)
+            {
+                transform.localScale = new Vector3(1,0.5f,1);
+                _collider.radius = 0.25f;
+            }
+            else
+            {
+                transform.localScale = new Vector3(1,1,1);
+                _collider.radius = 0.5f;
+            }
+            lastCrouchState = crouchPressed;
         }
         //if space is pressed and jump cooldown isent active
-        else if (jump.action.IsPressed() && jumpTimerActive)
+        if (jumpPressed && jumpTimerActive)
         {
             //jump
-            if(isGrounded)
+            if(isGrounded ||isClimbing)
             {
-                #if UNITY_EDITOR
-                Debug.Log($"{this}: Jumping");
-                #endif
-                isJumping = true;
-            }
-            //climb
-            else if(isClimbing)
-            {
-                #if UNITY_EDITOR
-                Debug.Log($"{this}: Climbing");
-                #endif
-                isJumping = true;
+                _moveDir.y = jumpPower;
             }
             //stop jumping
             else
             {
-                #if UNITY_EDITOR
-                Debug.Log($"{this}: Stop jumping");
-                #endif
-                if(isJumping)
-                    JumpCoolDown();
-                isJumping = false;
+                JumpCoolDown();
             }
         }
-        //if not jumping 
-        else
-            isJumping = false;
-        //addd moveDir to a new vector
-        Vector3 velocity = new Vector3(_moveDir.x, _moveDir.y, _moveDir.z);
-        //if jumping make velocity.y jump power
-        if (isJumping)
-            velocity.y = jumpPower;
         /*if climbing change the velocity.y by the slow 0>x>1
         because climbing can only happen when jumping it is bassicaly jumpPower*climbingSlow*/
         if(isClimbing)
         {
-            velocity.y *= climbingSlow;
-            #if UNITY_EDITOR
-            Debug.Log($"{this}: slow climb");
-            #endif
+            _moveDir.y *= climbingSlow;
         }
         //apply new velocity
-        _rb.linearVelocity = velocity;
+        _rb.linearVelocity = _moveDir;
     }
     bool isGrounded;
     bool isClimbing;
-
+    Collider[] groundHits = new Collider[1];
+    Collider[] climbHits = new Collider[1];
     public bool CheakGround()
     {
         /*creates a shpere on the gameObject GroundCheakPoint
         also cheaks if it collies with the layer in GroundMask*/
-        return Physics.OverlapSphere(
+        return Physics.OverlapSphereNonAlloc(
             groundCheckPoint.position,
-            0.35f,
+            0.25f,
+            groundHits,
             groundMask
-        ).Length > 0;
+        ) > 0;
     }
     public bool CheakClimbing()
     {
         /*creats a box inside of the player with a custom height
         the size of the box is a vector3 with the var boxSize
         cheacks for collisions on the layermask groundMask*/
-        return Physics.OverlapBox(
-            new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z),
+        return Physics.OverlapBoxNonAlloc(
+            transform.position + Vector3.up * height,           
             boxSize,
+            climbHits,
             transform.rotation,
             groundMask
-        ).Length > 0;
+        ) > 0;
     }
     void ToggleMovment(bool state)
     {
@@ -162,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), boxSize);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(groundCheckPoint.position, 0.35f);
+        Gizmos.DrawWireSphere(groundCheckPoint.position, 0.25f);
     }
 
 }

@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Threading;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,21 +15,21 @@ public class EventManager : MonoBehaviour
     GameObject eventPrefab;
     [SerializeField]
     int eventsCompleted;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        QTMannager();
-    }
+    [SerializeField]
+    PlayerInput player;
     //loop for qt
-    void QTMannager()
+    public IEnumerator QTMannager()
     {
+        player.SwitchCurrentActionMap("QuickTime");
         foreach(BaseEvent quickTimeEvent in eventList.quickTimeEvents)
         {
             EventPrefab newEvent = Instantiate(eventPrefab, Vector3.zero, quaternion.identity, transform).GetComponent<EventPrefab>();
             newEvent.transform.localPosition = quickTimeEvent.position;
             newEvent.shrinkDuration = quickTimeEvent.lifeTime;
             newEvent.inputAction = inputActionRef[quickTimeEvent.keyToPress];
+            yield return new WaitForSeconds(quickTimeEvent.delay);
         }
+        player.SwitchCurrentActionMap("Movement");
     }
     public void UpdateCompletedEvents(int i)
     {

@@ -15,6 +15,7 @@ public class EventPrefab : MonoBehaviour
     void Start()
     {
         startScale = toShrink.localScale;
+        manager = transform.parent.GetComponent<EventManager>();
     }
     void Update()
     {
@@ -27,20 +28,22 @@ public class EventPrefab : MonoBehaviour
         if (t >= 1f)
         {
             Debug.Log($"{this}: QT finished");
-            Destroy(transform.parent);
+            Destroy(gameObject);
+            manager.UpdateCompletedEvents(-1);
         }
         if(inputAction.action.IsPressed())
         ButtonPressed();
     }
+    EventManager manager;
     public void ButtonPressed()
     {
         bool b = QuickTimeEventMissedOrHit();
         if(b)
         {
-            transform.parent.GetComponent<EventManager>().UpdateCompletedEvents(1);
+            manager.UpdateCompletedEvents(1);
         }
         else
-            transform.parent.GetComponent<EventManager>().UpdateCompletedEvents(-1);
+            manager.UpdateCompletedEvents(-1);
     }
     public bool QuickTimeEventMissedOrHit()
     {

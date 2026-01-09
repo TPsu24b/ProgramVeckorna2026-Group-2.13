@@ -20,6 +20,6 @@ public class DoorMechanism : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        rb.linearVelocity = vector3(direction);   
+        rb.linearVelocity = new Vector3();   
     }
 }

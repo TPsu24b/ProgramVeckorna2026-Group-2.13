@@ -23,7 +23,8 @@ public class EventManager : MonoBehaviour
     {
         foreach(BaseEvent quickTimeEvent in eventList.quickTimeEvents)
         {
-            EventPrefab newEvent = Instantiate(eventPrefab, quickTimeEvent.position, quaternion.identity, transform).GetComponent<EventPrefab>();
+            EventPrefab newEvent = Instantiate(eventPrefab, Vector3.zero, quaternion.identity, transform).GetComponent<EventPrefab>();
+            newEvent.transform.localPosition = quickTimeEvent.position;
             newEvent.shrinkDuration = quickTimeEvent.lifeTime;
             newEvent.inputAction = inputActionRef[quickTimeEvent.keyToPress];
         }

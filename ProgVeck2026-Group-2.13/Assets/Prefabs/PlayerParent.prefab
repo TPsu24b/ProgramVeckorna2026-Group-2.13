@@ -373,11 +373,9 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckPoint: {fileID: 5993862991248094760}
   jumpPower: 5
-  jumpCooldown: 0.5
-  jumpTimerActive: 1
-  height: -0.1
+  height: 0
   climbingSlow: 0.4
-  boxSize: {x: 0.7, y: 0.1, z: 0.7}
+  boxSize: {x: 0.6, y: 0.3, z: 0.6}
 --- !u!114 &8987934234881912919
 MonoBehaviour:
   m_ObjectHideFlags: 0

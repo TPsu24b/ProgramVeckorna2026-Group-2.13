@@ -4,24 +4,33 @@ using UnityEngine;
 public class SavePointManager : MonoBehaviour
 {
     [SerializeField]
-    Transform currentSavePoint, player;
+    Transform player;
+    [SerializeField]
+    Vector3 posData;
     void Awake()
     {
-        string data = File.ReadAllText(Application.persistentDataPath);
-        currentSavePoint = JsonUtility.FromJson<Transform>(data);
+        try
+        {
+            string data = File.ReadAllText(Application.persistentDataPath + "/savePoint.json");
+            posData = JsonUtility.FromJson<Vector3>(data);
+        }
+        catch
+        {
+            Debug.Log($"{this}: no data exist, no prob tho!");
+        }
     }
     public void UpdateSavePoint(Transform transform)
     {
-        currentSavePoint = transform;
+        posData = transform.position;
         SaveData();
     }
     void SaveData()
     {
-        string data = JsonUtility.ToJson(currentSavePoint);
-        File.WriteAllText(Application.persistentDataPath, data);
+        string data = JsonUtility.ToJson(posData, true);
+        File.WriteAllText(Application.persistentDataPath + "/savePoint.json", data);
     }
     public void LoadLocation()
     {
-        player.position = currentSavePoint.position;
+        player.position = posData;
     }
 }

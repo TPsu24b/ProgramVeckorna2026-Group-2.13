@@ -6,32 +6,23 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Input Ref")]
-    public InputActionReference move;
-    public InputActionReference jump;
-    public InputActionReference crouching;
+    [SerializeField] InputActionReference move;
+    [SerializeField] InputActionReference jump, crouching;
     [Header("Movement Settings")]
-    public float moveSpeed;
-    [SerializeField]
-    private Vector3 _moveDir;
-    [SerializeField]
-    bool jumpPressed, crouchPressed;
+    [SerializeField] float moveSpeed;
+    [SerializeField] Vector3 _moveDir;
+    [SerializeField] bool jumpPressed, crouchPressed;
     [Header("TouchingGround bool")]
-    public LayerMask groundMask;
-    public Transform groundCheckPoint;
+    [SerializeField] LayerMask groundMask;
+    [SerializeField] Transform groundCheckPoint;
     private Rigidbody _rb;
-    [Header("Jumping Settings")]
+    [Header("Jumping Settings")] 
     public float jumpPower;
-    [SerializeField]
-    float jumpCooldown = 0.2f;
-    float timer;
-    [SerializeField]
-    bool jumpTimerActive = true;
 
     [Header("Climbing settings")]
-    [SerializeField]
-    float height, climbingSlow;
-    [SerializeField]
-    Vector3 boxSize;
+    [SerializeField] float height;
+    [SerializeField] float climbingSlow;
+    [SerializeField] Vector3 boxSize;
     SphereCollider _collider;
     
     void Start()
@@ -53,23 +44,9 @@ public class PlayerMovement : MonoBehaviour
         //read the wasd input, convert it into a vector3 used for velocity later
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
-        //if cooldown is active reduce time remaining
-        if (!jumpTimerActive)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0f)
-            {
-                jumpTimerActive = true;
-            }
-        }
+        
         jumpPressed = jump.action.IsPressed();
         crouchPressed = crouching.action.IsPressed();
-    }
-    //activate jump cooldown
-    void JumpCoolDown()
-    {
-        jumpTimerActive = false;
-        timer = jumpCooldown;
     }
     bool lastCrouchState;
     void FixedUpdate()
@@ -93,17 +70,12 @@ public class PlayerMovement : MonoBehaviour
             lastCrouchState = crouchPressed;
         }
         //if space is pressed and jump cooldown isent active
-        if (jumpPressed && jumpTimerActive)
+        if (jumpPressed)
         {
             //jump
             if(isGrounded ||isClimbing)
             {
                 _moveDir.y = jumpPower;
-            }
-            //stop jumping
-            else
-            {
-                JumpCoolDown();
             }
         }
         /*if climbing change the velocity.y by the slow 0>x>1

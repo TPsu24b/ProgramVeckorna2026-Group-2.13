@@ -1411,6 +1411,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 426554244572995832, guid: 120f6a8eacd175d4d89bd85272c70b6a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980117225321554010, guid: 120f6a8eacd175d4d89bd85272c70b6a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980117225321554010, guid: 120f6a8eacd175d4d89bd85272c70b6a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3228437854082347993, guid: 120f6a8eacd175d4d89bd85272c70b6a, type: 3}
       propertyPath: player
       value: 
@@ -1455,6 +1467,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8512017512734869294, guid: 120f6a8eacd175d4d89bd85272c70b6a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.26
+      objectReference: {fileID: 0}
     - target: {fileID: 8971206970248792111, guid: 120f6a8eacd175d4d89bd85272c70b6a, type: 3}
       propertyPath: m_Name
       value: SavePointManager
@@ -1475,6 +1491,18 @@ PrefabInstance:
     - target: {fileID: 3223908453164712025, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
       propertyPath: m_Name
       value: PlayerParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159947954127076670, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159947954127076670, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.1118035
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159947954127076670, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.6
       objectReference: {fileID: 0}
     - target: {fileID: 6235638249556750379, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
       propertyPath: jump

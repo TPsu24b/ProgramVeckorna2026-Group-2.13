@@ -12,7 +12,8 @@ public class ASyncLoader : MonoBehaviour
     [SerializeField] private int spinSpeed;
     public void LoadLevelBtn(string levelToLoad)
     {
-        mainMenu.SetActive(false);
+        if(mainMenu != null)
+            mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
 
         StartCoroutine(LoadLevelASync(levelToLoad));

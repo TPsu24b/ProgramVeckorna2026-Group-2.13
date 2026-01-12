@@ -20,7 +20,7 @@ namespace Assets.Scripts.Bluetooth_Devices
 
             if (GetDistance(recieverRB.position, parentRB.position) < 1)
             {
-                
+                mainReciever.
             }
         }
     }

@@ -7,20 +7,20 @@ using UnityEngine;
 
 public class energy : MonoBehaviour
 {
-    public List<GameObject> recieversList = new List<GameObject>();
+    public List<UniversalReciever> recieversList = new List<UniversalReciever>();
 
     Output output;
     Conducter conducter;
     Battery battery;
-    
 
     public bool outputType, conducterType, batteryType;
     [SerializeField]
-    protected GameObject mainReciever, parent; 
+    protected GameObject parent;
+    protected UniversalReciever mainReciever;
     int previousedistance;
     void Start()
     {
-        foreach(GameObject obj in recieversList)
+        foreach(UniversalReciever obj in recieversList)
         {
             int i = GetDistance(obj.transform.position, transform.position);
             if (i < previousedistance)
@@ -38,7 +38,7 @@ public class energy : MonoBehaviour
     {
         
     }
-
+    //Gets distance of objecy (pythagoras)
     public int GetDistance(Vector3 pos1, Vector3 pos2)
     {
         return (int)Math.Sqrt(Math.Pow(pos1.x - pos2.x, 2) + Math.Pow(pos1.y - pos2.y, 2) + Math.Pow(pos1.z - pos2.z, 2));

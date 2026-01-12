@@ -6,7 +6,7 @@ public class BaseEvent
 {
     
     [SerializeField]
-    public int lifeTime, keyToPress, delay;
+    public int lifeTime, keyToPress;
     [SerializeField]
     public Vector3 position; 
 }

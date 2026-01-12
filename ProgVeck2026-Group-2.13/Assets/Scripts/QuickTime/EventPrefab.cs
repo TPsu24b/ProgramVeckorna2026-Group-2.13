@@ -30,7 +30,7 @@ public class EventPrefab : MonoBehaviour
         if (t >= 1f)
         {
             Debug.Log($"{this}: QT finished");
-            manager.UpdateCompletedEvents(-1);
+            manager.UpdateCompletedEvents(1, shrinkDuration);
             Destroy(gameObject);
         }
         if(inputAction.action.IsPressed())
@@ -42,11 +42,11 @@ public class EventPrefab : MonoBehaviour
         bool b = QuickTimeEventMissedOrHit();
         if(b)
         {
-            manager.UpdateCompletedEvents(1);
+            manager.UpdateCompletedEvents(-1, shrinkDuration);
         }
         else if(!b)
         {
-            manager.UpdateCompletedEvents(-1);
+            manager.UpdateCompletedEvents(1, shrinkDuration);
         }
         Destroy(gameObject);
     }

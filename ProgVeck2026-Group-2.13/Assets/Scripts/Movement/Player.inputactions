@@ -175,22 +175,13 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "5",
-                    "type": "Button",
-                    "id": "1b5cfb75-4290-402a-b2d7-e1d89b86dd9d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "4d070dff-3242-476f-b9b8-b7cb17906b46",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -201,7 +192,7 @@
                 {
                     "name": "",
                     "id": "4dadada8-b0cb-43e6-b9cd-7d9bfd4e4ffc",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -212,7 +203,7 @@
                 {
                     "name": "",
                     "id": "6d71ad38-53c7-447f-aa43-ffc994ac6748",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -223,22 +214,11 @@
                 {
                     "name": "",
                     "id": "c3dc568a-66f3-47fd-b4d8-36654354562d",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "4",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a64e6dd5-9aff-4f1c-80cb-de9fed98aedc",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

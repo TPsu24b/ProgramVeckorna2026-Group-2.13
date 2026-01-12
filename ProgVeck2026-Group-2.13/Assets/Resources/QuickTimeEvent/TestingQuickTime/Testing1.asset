@@ -15,17 +15,31 @@ MonoBehaviour:
   quickTimeEvents:
   - lifeTime: 2
     keyToPress: 0
-    delay: 2
     position: {x: 200, y: 100, z: 0}
   - lifeTime: 2
     keyToPress: 2
-    delay: 2
     position: {x: 200, y: 500, z: 0}
   - lifeTime: 2
     keyToPress: 1
-    delay: 2
     position: {x: 585, y: 247, z: 0}
   - lifeTime: 2
     keyToPress: 3
-    delay: 2
     position: {x: 400, y: 300, z: 0}
+  - lifeTime: 3
+    keyToPress: 1
+    position: {x: 300, y: 300, z: 0}
+  - lifeTime: 1
+    keyToPress: 1
+    position: {x: 400, y: 400, z: 0}
+  - lifeTime: 3
+    keyToPress: 3
+    position: {x: 250, y: 550, z: 0}
+  - lifeTime: 1
+    keyToPress: 0
+    position: {x: 400, y: 300, z: 0}
+  - lifeTime: 2
+    keyToPress: 3
+    position: {x: 400, y: 300, z: 0}
+  - lifeTime: 3
+    keyToPress: 0
+    position: {x: 400, y: 100, z: 0}

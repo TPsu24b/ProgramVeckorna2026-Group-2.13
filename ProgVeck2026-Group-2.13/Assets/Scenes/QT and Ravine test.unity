@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 204584066}
   - component: {fileID: 204584065}
   - component: {fileID: 204584069}
+  - component: {fileID: 204584070}
   m_Layer: 0
   m_Name: Cube (11)
   m_TagString: Untagged
@@ -365,6 +366,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.0000002, z: 0.3}
   m_Center: {x: -2, y: 0, z: 0.2}
+--- !u!54 &204584070
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204584064}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &209238836
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +505,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 223482593}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &210182800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3223908453164712025, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+  m_PrefabInstance: {fileID: 450073124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &210182802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210182800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc36fc9d701346428bfa216e81f4fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Bluetooth_Devices.Output
+  recieversList:
+  - {fileID: 1047787843}
+  outputType: 0
+  conducterType: 0
+  batteryType: 0
+  parent: {fileID: 210182800}
 --- !u!1 &223482592
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,22 +638,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3223908453164712025, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 210182802}
   m_SourcePrefab: {fileID: 100100000, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
---- !u!114 &498018549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: QuickTime/1
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 7cd8f6240857122488dc2daed8f837f6, type: 3}
-  m_ActionId: d1b08bb2-4418-4064-a7fc-e23ab1fa0ffc
 --- !u!1 &600200294
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +675,7 @@ Transform:
   m_Children:
   - {fileID: 1859027336}
   - {fileID: 204584068}
+  - {fileID: 1047787842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &600200296
@@ -649,9 +690,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a6bba6f71c27b48ac36f96647f6fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorMechanism
-  direction: 0
-  door1: {fileID: 0}
-  door2: {fileID: 0}
+  speed: 1
+  moveDistance: 0
+  door1: {fileID: 1859027332}
+  door2: {fileID: 204584064}
+  doorSwitch: {fileID: 1047787843}
+  doorStartPos1: {x: 0, y: 0, z: 0}
+  doorStartPos2: {x: 0, y: 0, z: 0}
+  doorEndPos1: {x: 0, y: 0, z: 0}
+  doorEndPos2: {x: 0, y: 0, z: 0}
 --- !u!1 &622796045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1259,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 223482593}
   m_LocalEulerAnglesHint: {x: 52.179, y: 0, z: 0}
+--- !u!1 &1047787841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1047787842}
+  - component: {fileID: 1047787843}
+  m_Layer: 0
+  m_Name: SwitchReciever
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1047787842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047787841}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 600200295}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1047787843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047787841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1268b0bb014f24297702c6b2069ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Bluetooth_Devices.SwitchReciever
+  mode: 0
 --- !u!1 &1071476844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,7 +1978,6 @@ GameObject:
   - component: {fileID: 1859027334}
   - component: {fileID: 1859027333}
   - component: {fileID: 1859027339}
-  - component: {fileID: 1859027338}
   - component: {fileID: 1859027337}
   m_Layer: 0
   m_Name: Cube (12)
@@ -2013,23 +2104,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 118
   m_CollisionDetection: 0
---- !u!114 &1859027338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859027332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a6bba6f71c27b48ac36f96647f6fe5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  direction: 0
-  door1: {fileID: 0}
-  door2: {fileID: 0}
 --- !u!65 &1859027339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2163,63 +2239,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 223482593}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &2021726794
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2021726796}
-  - component: {fileID: 2021726795}
-  m_Layer: 0
-  m_Name: QuickTimeMananger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2021726795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021726794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940b2ab8b07884945819b480029f77c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuickTimeManager
-  inputActionRef:
-  - {fileID: 498018549}
-  eventList: {fileID: 0}
-  eventPrefab: {fileID: 0}
-  eventsCompleted: 0
-  player: {fileID: 0}
-  activeEvents: []
---- !u!4 &2021726796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021726794}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.67645, y: 7.0465, z: 0.30215004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1725318393}
-  - {fileID: 2021726796}
   - {fileID: 223482593}
   - {fileID: 450073124}
   - {fileID: 1210906303}

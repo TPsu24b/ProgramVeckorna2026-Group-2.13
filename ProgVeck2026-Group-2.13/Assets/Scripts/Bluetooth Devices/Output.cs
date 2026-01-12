@@ -12,15 +12,16 @@ namespace Assets.Scripts.Bluetooth_Devices
     {
         Rigidbody recieverRB;
         Rigidbody parentRB;
+        SwitchReciever reciever;
         public override void Use()
         {
             base.Use();
-            recieverRB = mainReciever.GetComponent<Rigidbody>();
+            recieverRB = reciever.GetComponent<Rigidbody>();
             parentRB = parent.GetComponent<Rigidbody>();
 
             if (GetDistance(recieverRB.position, parentRB.position) < 1)
             {
-                mainReciever.
+                reciever.Use();
             }
         }
     }

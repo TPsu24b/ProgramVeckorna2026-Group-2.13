@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class DoorMechanism : MonoBehaviour
 {
-    public int speed, moveDistance;
+    public float speed, moveDistance;
     Rigidbody rb1,rb2;
     public GameObject door1, door2;
-    SwitchReciever doorSwitch;
+    [SerializeField] SwitchReciever doorSwitch;
     [SerializeField] Vector3 doorStartPos1, doorStartPos2;
     [SerializeField] Vector3 doorEndPos1, doorEndPos2;
     void Start()
@@ -25,10 +25,10 @@ public class DoorMechanism : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (doorSwitch.mode = true)
+        if (doorSwitch.mode == true)
         {
-            Vector3.Lerp(doorStartPos1, doorEndPos1, 0.1f);
-            Vector3.Lerp(doorStartPos2, doorEndPos2, 0.1f);
+            Vector3.Lerp(doorStartPos1, doorEndPos1, speed);
+            Vector3.Lerp(doorStartPos2, doorEndPos2, speed);
         }
     }
 }

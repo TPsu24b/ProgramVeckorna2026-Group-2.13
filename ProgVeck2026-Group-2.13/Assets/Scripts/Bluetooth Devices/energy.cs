@@ -13,10 +13,9 @@ public class energy : MonoBehaviour
     Conducter conducter;
     Battery battery;
 
-    public bool outputType, conducterType, batteryType;
-    [SerializeField]
-    protected GameObject parent;
-    protected UniversalReciever mainReciever;
+    public enum Type {output, conducter, battery};
+    public Type energyType;
+    [SerializeField] protected UniversalReciever mainReciever;
     int previousedistance;
     void Start()
     {
@@ -29,10 +28,6 @@ public class energy : MonoBehaviour
                 mainReciever = obj;
             }
         } 
-    }
-    void Update()
-    {
-        
     }
     public virtual void Use()
     {

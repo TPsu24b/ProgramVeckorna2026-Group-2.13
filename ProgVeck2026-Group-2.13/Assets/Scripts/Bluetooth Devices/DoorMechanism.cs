@@ -1,39 +1,52 @@
+using System.Collections;
 using Assets.Scripts.Bluetooth_Devices;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class DoorMechanism : MonoBehaviour
+public class DoorMechanism : SwitchReciever
 {
-    public float speed, moveDistance;
-    Rigidbody rb1,rb2;
-    public GameObject door1, door2;
-    [SerializeField] SwitchReciever doorSwitch;
-    [SerializeField] Vector3 doorStartPos1, doorStartPos2;
-    [SerializeField] Vector3 doorEndPos1, doorEndPos2;
-    void Start()
+    [SerializeField] Transform doorLeft, doorRight;
+    [SerializeField] float startZOffset, endZOffset, timeToOpen, moveDistance;
+    private float elapsedTime;
+    [SerializeField] private bool doorOpen = false, active;
+    [SerializeField] private float startZ, endZ;
+    public override void Use()
     {
-        rb1 = door1.GetComponent<Rigidbody>();
-        rb2 = door2.GetComponent<Rigidbody>();
-        doorStartPos1 = rb1.position;
-        doorStartPos2 = rb2.position;
-        doorEndPos1 = rb1.position + new Vector3(0, 0, moveDistance);
-        doorEndPos2 = rb2.position + new Vector3(0, 0, -moveDistance);
-
+        StartDoorLoop(!doorOpen);
+        doorOpen = !doorOpen;
     }
-
-    // Update is called once per frame
+    public void StartDoorLoop(bool openDoor)
+    {
+        if(openDoor) //if opening
+        {
+            startZ = doorLeft.localPosition.z;
+            endZ = endZOffset;
+        }
+        else if(!openDoor) //if closing
+        {
+            startZ = doorLeft.localPosition.z;
+            endZ = startZOffset;
+        }
+        if(active)
+            elapsedTime = 0;
+        active = true;
+    }
     void Update()
     {
-        if (doorSwitch.mode == true)
+        if(active)
         {
-            Vector3.Lerp(doorStartPos1, doorEndPos1, speed);
-            Vector3.Lerp(doorStartPos2, doorEndPos2, speed);
-        }
-        else
-        {
-            rb1.position = doorStartPos1;
-            rb2.position = doorStartPos2;
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / timeToOpen;
+
+            doorLeft.localPosition = Vector3.Lerp(new Vector3(0, 0, startZ), new Vector3(0, 0, endZ), t);
+            doorRight.localPosition = Vector3.Lerp(new Vector3(0, 0, -startZ), new Vector3(0, 0, -endZ), t);
+            if(t >= 1f)
+            {
+                elapsedTime = 0;
+                active = false;
+                Debug.Log("Door finished");
+            }
         }
     }
 }

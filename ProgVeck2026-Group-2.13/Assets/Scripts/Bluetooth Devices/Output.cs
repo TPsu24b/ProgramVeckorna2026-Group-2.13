@@ -5,30 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
-
-namespace Assets.Scripts.Bluetooth_Devices
+public class Output : energy
 {
-    internal class Output:energy
+    public GameObject reciever;
+    public override void Use()
     {
-        public Rigidbody recieverRB;
-        public Rigidbody parentRB;
-        public  SwitchReciever reciever;
-
-        private void Start()
-        {
-            recieverRB = reciever.GetComponent<Rigidbody>();
-            parentRB = parent.GetComponent<Rigidbody>();
-        }
-        private void Update()
-        {
-            if (GetDistance(recieverRB.position, parentRB.position) < 1)
-            {
-                reciever.Use();
-            }
-        }
-        public override void Use()
-        {
-            reciever.Use();
-        }
+        reciever.GetComponent<SwitchReciever>().Use();
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Reciver")
+            reciever.GetComponent<SwitchReciever>().Use();
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Reciver")
+            reciever.GetComponent<SwitchReciever>().Use();
     }
 }
+

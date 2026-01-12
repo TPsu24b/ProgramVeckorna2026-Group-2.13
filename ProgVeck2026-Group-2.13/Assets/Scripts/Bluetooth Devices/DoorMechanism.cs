@@ -30,5 +30,10 @@ public class DoorMechanism : MonoBehaviour
             Vector3.Lerp(doorStartPos1, doorEndPos1, speed);
             Vector3.Lerp(doorStartPos2, doorEndPos2, speed);
         }
+        else
+        {
+            rb1.position = doorStartPos1;
+            rb2.position = doorStartPos2;
+        }
     }
 }

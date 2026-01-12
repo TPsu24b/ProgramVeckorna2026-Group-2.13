@@ -119,6 +119,32 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &117877082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7838015482721774980, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+  m_PrefabInstance: {fileID: 450073124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &117877090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117877082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc36fc9d701346428bfa216e81f4fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Bluetooth_Devices.Output
+  recieversList:
+  - {fileID: 1047787843}
+  outputType: 0
+  conducterType: 0
+  batteryType: 0
+  parent: {fileID: 117877082}
+  recieverRB: {fileID: 0}
+  parentRB: {fileID: 0}
+  reciever: {fileID: 1047787843}
 --- !u!1 &123007885
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +157,7 @@ GameObject:
   - component: {fileID: 123007888}
   - component: {fileID: 123007887}
   - component: {fileID: 123007886}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +177,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -243,9 +269,8 @@ GameObject:
   - component: {fileID: 204584067}
   - component: {fileID: 204584066}
   - component: {fileID: 204584065}
-  - component: {fileID: 204584069}
   - component: {fileID: 204584070}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,27 +370,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 600200295}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!65 &204584069
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204584064}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 1.0000002, z: 0.3}
-  m_Center: {x: -2, y: 0, z: 0.2}
 --- !u!54 &204584070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -405,7 +409,7 @@ GameObject:
   - component: {fileID: 209238839}
   - component: {fileID: 209238838}
   - component: {fileID: 209238837}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +429,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -505,29 +509,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 223482593}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &210182800 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3223908453164712025, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
-  m_PrefabInstance: {fileID: 450073124}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &210182802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210182800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc36fc9d701346428bfa216e81f4fd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Bluetooth_Devices.Output
-  recieversList:
-  - {fileID: 1047787843}
-  outputType: 0
-  conducterType: 0
-  batteryType: 0
-  parent: {fileID: 210182800}
 --- !u!1 &223482592
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2008067808796952582, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3223908453164712025, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -639,9 +624,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3223908453164712025, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 7838015482721774980, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 210182802}
+      addedObject: {fileID: 117877090}
   m_SourcePrefab: {fileID: 100100000, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
 --- !u!1 &600200294
 GameObject:
@@ -690,8 +675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a6bba6f71c27b48ac36f96647f6fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorMechanism
-  speed: 1
-  moveDistance: 0
+  speed: 0.1
+  moveDistance: 2
   door1: {fileID: 1859027332}
   door2: {fileID: 204584064}
   doorSwitch: {fileID: 1047787843}
@@ -711,7 +696,7 @@ GameObject:
   - component: {fileID: 622796048}
   - component: {fileID: 622796047}
   - component: {fileID: 622796046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,7 +716,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -823,7 +808,7 @@ GameObject:
   - component: {fileID: 628797070}
   - component: {fileID: 628797069}
   - component: {fileID: 628797068}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +828,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -935,7 +920,7 @@ GameObject:
   - component: {fileID: 747694512}
   - component: {fileID: 747694511}
   - component: {fileID: 747694510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +940,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1047,7 +1032,7 @@ GameObject:
   - component: {fileID: 939535554}
   - component: {fileID: 939535553}
   - component: {fileID: 939535552}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1052,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1159,7 +1144,7 @@ GameObject:
   - component: {fileID: 1004562988}
   - component: {fileID: 1004562987}
   - component: {fileID: 1004562986}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1179,7 +1164,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1269,6 +1254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1047787842}
   - component: {fileID: 1047787843}
+  - component: {fileID: 1047787844}
   m_Layer: 0
   m_Name: SwitchReciever
   m_TagString: Untagged
@@ -1304,6 +1290,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Bluetooth_Devices.SwitchReciever
   mode: 0
+--- !u!54 &1047787844
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047787841}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &1071476844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,7 +1329,7 @@ GameObject:
   - component: {fileID: 1071476847}
   - component: {fileID: 1071476846}
   - component: {fileID: 1071476845}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1349,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1442,7 +1455,7 @@ GameObject:
   - component: {fileID: 1136854895}
   - component: {fileID: 1136854894}
   - component: {fileID: 1136854893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1475,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1612,7 +1625,7 @@ GameObject:
   - component: {fileID: 1518238397}
   - component: {fileID: 1518238396}
   - component: {fileID: 1518238395}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1632,7 +1645,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1865,7 +1878,7 @@ GameObject:
   - component: {fileID: 1797141611}
   - component: {fileID: 1797141610}
   - component: {fileID: 1797141609}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1885,7 +1898,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1977,9 +1990,8 @@ GameObject:
   - component: {fileID: 1859027335}
   - component: {fileID: 1859027334}
   - component: {fileID: 1859027333}
-  - component: {fileID: 1859027339}
   - component: {fileID: 1859027337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2106,27 +2118,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
---- !u!65 &1859027339
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859027332}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 1.0000002, z: 0.3}
-  m_Center: {x: -2, y: 0, z: 0.2}
 --- !u!1 &1971354901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,7 +2130,7 @@ GameObject:
   - component: {fileID: 1971354904}
   - component: {fileID: 1971354903}
   - component: {fileID: 1971354902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2159,7 +2150,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0

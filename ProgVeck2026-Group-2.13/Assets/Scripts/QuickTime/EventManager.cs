@@ -20,9 +20,13 @@ public class EventManager : MonoBehaviour
     PlayerInput player;
     public List<EventPrefab> activeEvents = new List<EventPrefab>();
     //loop for qt
-
+    void Start()
+    {
+        StartCoroutine(QTMannager());
+    }
     public IEnumerator QTMannager()
     {
+        yield return new WaitForSeconds(5);
         player.SwitchCurrentActionMap("QuickTime");
         foreach(BaseEvent quickTimeEvent in eventList.quickTimeEvents)
         {
@@ -39,5 +43,6 @@ public class EventManager : MonoBehaviour
     public void UpdateCompletedEvents(int i)
     {
         eventsCompleted += i;
+
     }
 }

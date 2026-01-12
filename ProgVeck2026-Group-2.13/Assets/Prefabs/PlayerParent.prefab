@@ -364,10 +364,13 @@ MonoBehaviour:
   move: {fileID: 0}
   jump: {fileID: 0}
   crouching: {fileID: 0}
+  sprinting: {fileID: 0}
   moveSpeed: 5
+  sprintMulti: 1.5
   _moveDir: {x: 0, y: 0, z: 0}
   jumpPressed: 0
   crouchPressed: 0
+  isSprinting: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 64

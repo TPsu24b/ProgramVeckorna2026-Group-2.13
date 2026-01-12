@@ -219,6 +219,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+--- !u!114 &991461082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Movement/Sprint
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 7cd8f6240857122488dc2daed8f837f6, type: 3}
+  m_ActionId: 0ed6c16d-39bf-4c5e-a954-1f9682376e8d
 --- !u!114 &1045288208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +685,10 @@ PrefabInstance:
       propertyPath: crouching
       value: 
       objectReference: {fileID: 257668667}
+    - target: {fileID: 6235638249556750379, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      propertyPath: sprinting
+      value: 
+      objectReference: {fileID: 991461082}
     - target: {fileID: 8004671940621411186, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -7,11 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Input Ref")]
     [SerializeField] InputActionReference move;
-    [SerializeField] InputActionReference jump, crouching;
+    [SerializeField] InputActionReference jump, crouching, sprinting;
     [Header("Movement Settings")]
-    [SerializeField] float moveSpeed;
+    [SerializeField] float moveSpeed, sprintMulti;
     [SerializeField] Vector3 _moveDir;
-    [SerializeField] bool jumpPressed, crouchPressed;
+    [SerializeField] bool jumpPressed, crouchPressed, isSprinting;
     [Header("TouchingGround bool")]
     [SerializeField] LayerMask groundMask;
     [SerializeField] Transform groundCheckPoint;
@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         
         jumpPressed = jump.action.IsPressed();
         crouchPressed = crouching.action.IsPressed();
+        isSprinting = sprinting.action.IsPressed();
     }
     bool lastCrouchState;
     void FixedUpdate()
@@ -77,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 _moveDir.y = jumpPower;
             }
+        }
+        if(isSprinting)
+        {
+            _moveDir.x *= sprintMulti;
+            _moveDir.z *= sprintMulti;
         }
         /*if climbing change the velocity.y by the slow 0>x>1
         because climbing can only happen when jumping it is bassicaly jumpPower*climbingSlow*/

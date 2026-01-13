@@ -264,6 +264,7 @@ MonoBehaviour:
   mainMenu: {fileID: 0}
   loadingAnim: {fileID: 223504566}
   spinSpeed: -250
+  saveManager: {fileID: 0}
 --- !u!1 &263544066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
   sceneLoader: {fileID: 223504569}
+  saveManager: {fileID: 0}
   sceneToLoad: Silo
 --- !u!33 &1182519212
 MeshFilter:

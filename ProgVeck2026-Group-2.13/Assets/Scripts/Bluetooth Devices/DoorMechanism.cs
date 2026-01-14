@@ -39,8 +39,8 @@ public class DoorMechanism : SwitchReciever
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / timeToOpen;
 
-            doorLeft.localPosition = Vector3.Lerp(new Vector3(0, 0, startZ), new Vector3(0, 0, endZ), t);
-            doorRight.localPosition = Vector3.Lerp(new Vector3(0, 0, -startZ), new Vector3(0, 0, -endZ), t);
+            doorLeft.localPosition = Vector3.Lerp(new Vector3(doorLeft.localPosition.x, doorLeft.localPosition.y, startZ), new Vector3(doorLeft.localPosition.x, doorLeft.localPosition.y, endZ), t);
+            doorRight.localPosition = Vector3.Lerp(new Vector3(doorRight.localPosition.x, doorRight.localPosition.y, -startZ), new Vector3(doorRight.localPosition.x, doorRight.localPosition.y, -endZ), t);
             if(t >= 1f)
             {
                 elapsedTime = 0;

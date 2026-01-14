@@ -11,8 +11,8 @@ public class EventManager : MonoBehaviour
     [Header("Event ref")]
     [SerializeField] InputActionReference[] inputActionRef;
     [SerializeField] EventList eventList;
-    [SerializeField] GameObject eventPrefab;
-    [Header("player ref")]
+    [SerializeField] GameObject eventPrefab, tutorial;
+    [Header("Player ref")]
     [SerializeField] GameObject playerOBJ;
     [SerializeField] PlayerInput player;
     [Header("Event info")]
@@ -26,11 +26,13 @@ public class EventManager : MonoBehaviour
     //loop for qt
     void Start()
     {
+        tutorial.SetActive(true);
         StartCoroutine(QTMannager());
     }
     public IEnumerator QTMannager()
     {
         yield return new WaitForSeconds(5);
+        tutorial.SetActive(false);
         player.SwitchCurrentActionMap("QuickTime");
         foreach(BaseEvent quickTimeEvent in eventList.quickTimeEvents)
         {

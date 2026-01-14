@@ -321,6 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1304453199450486084}
   - component: {fileID: 6235638249556750379}
+  - component: {fileID: 1349016344434256328}
   - component: {fileID: 8987934234881912919}
   - component: {fileID: 2008167304169332925}
   - component: {fileID: 6809151233587417768}
@@ -379,6 +380,29 @@ MonoBehaviour:
   height: 0
   climbingSlow: 0.4
   boxSize: {x: 0.6, y: 0.3, z: 0.6}
+  animator: {fileID: 1349016344434256328}
+--- !u!95 &1349016344434256328
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838015482721774980}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4949ed5376e3954ea193a1556204357, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8987934234881912919
 MonoBehaviour:
   m_ObjectHideFlags: 0

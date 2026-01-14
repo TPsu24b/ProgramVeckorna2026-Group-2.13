@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float climbingSlow;
     [SerializeField] Vector3 boxSize;
     SphereCollider _collider;
+    [Header("Animator Controller")]
+    [SerializeField] private Animator animator;
     
     void Start()
     {
@@ -54,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
     {     
             
         isGrounded = CheakGround();
-        isClimbing = CheakClimbing();
         //if courching and on ground crouch
         if(lastCrouchState != crouchPressed)
         {
@@ -71,32 +73,21 @@ public class PlayerMovement : MonoBehaviour
             lastCrouchState = crouchPressed;
         }
         //if space is pressed and jump cooldown isent active
-        if (jumpPressed)
+        if (jumpPressed && isGrounded)
         {
-            //jump
-            if(isGrounded ||isClimbing)
-            {
-                _moveDir.y = jumpPower;
-            }
+            _moveDir.y = jumpPower;
+            animator.SetTrigger("jumping");
         }
         if(isSprinting)
         {
             _moveDir.x *= sprintMulti;
             _moveDir.z *= sprintMulti;
         }
-        /*if climbing change the velocity.y by the slow 0>x>1
-        because climbing can only happen when jumping it is bassicaly jumpPower*climbingSlow*/
-        if(isClimbing)
-        {
-            _moveDir.y *= climbingSlow;
-        }
         //apply new velocity
         _rb.linearVelocity = _moveDir;
     }
     bool isGrounded;
-    bool isClimbing;
     Collider[] groundHits = new Collider[1];
-    Collider[] climbHits = new Collider[1];
     public bool CheakGround()
     {
         /*creates a shpere on the gameObject GroundCheakPoint
@@ -105,19 +96,6 @@ public class PlayerMovement : MonoBehaviour
             groundCheckPoint.position,
             0.25f,
             groundHits,
-            groundMask
-        ) > 0;
-    }
-    public bool CheakClimbing()
-    {
-        /*creats a box inside of the player with a custom height
-        the size of the box is a vector3 with the var boxSize
-        cheacks for collisions on the layermask groundMask*/
-        return Physics.OverlapBoxNonAlloc(
-            transform.position + Vector3.up * height,           
-            boxSize,
-            climbHits,
-            transform.rotation,
             groundMask
         ) > 0;
     }

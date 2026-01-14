@@ -43,6 +43,7 @@ public class EventManager : MonoBehaviour
             yield return new WaitForSeconds(quickTimeEvent.lifeTime + 1f);
         }
         player.SwitchCurrentActionMap("Movement");
+        yield return StartCoroutine(QTMannager());
     }
     public void UpdateCompletedEvents(int updatePos, float moveSpeed)
     {

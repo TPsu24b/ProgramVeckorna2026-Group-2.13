@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using Unity.Burst.Intrinsics;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log($"{this}: Failed to load \nReason: {error}");
         }
     }
-    
+    Vector3 _lastLookDir = Vector3.forward; // default facing direction
     void Update()
     {
         //read the wasd input, convert it into a vector3 used for velocity later
@@ -51,12 +52,28 @@ public class PlayerMovement : MonoBehaviour
         jumpPressed = jump.action.IsPressed();
         crouchPressed = crouching.action.IsPressed();
         isSprinting = sprinting.action.IsPressed();
+
     }
     bool lastCrouchState;
     void FixedUpdate()
     {     
+        Vector3 horizontal = new Vector3(_moveDir.x, 0f, _moveDir.z);
             
+        if (horizontal.sqrMagnitude > 0.001f)
+        {
+            animator.SetBool("walking", true);
+            _lastLookDir = _moveDir.normalized;
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(new Vector3(_lastLookDir.x, 0, _lastLookDir.z)),
+                Time.deltaTime * 10f
+            );
+        }
+        else 
+            animator.SetBool("walking", false);
         isGrounded = CheakGround();
+        animator.SetBool("touchingGround", isGrounded);
         //if courching and on ground crouch
         if(lastCrouchState != crouchPressed)
         {
@@ -64,11 +81,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.localScale = new Vector3(1,0.5f,1);
                 _collider.radius = 0.25f;
+                animator.SetBool("crouching", true);
             }
             else
             {
                 transform.localScale = new Vector3(1,1,1);
                 _collider.radius = 0.5f;
+                animator.SetBool("crouching", false);
             }
             lastCrouchState = crouchPressed;
         }
@@ -76,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpPressed && isGrounded)
         {
             _moveDir.y = jumpPower;
-            animator.SetTrigger("jumping");
+            animator.Play("Jumping");     
         }
         if(isSprinting)
         {
@@ -107,8 +126,6 @@ public class PlayerMovement : MonoBehaviour
     //draws the touchingGround and Climbing bools for ease of understanding and use
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + height, gameObject.transform.position.z), boxSize);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundCheckPoint.position, 0.25f);
     }

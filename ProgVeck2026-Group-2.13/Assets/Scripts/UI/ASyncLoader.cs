@@ -13,6 +13,7 @@ public class ASyncLoader : MonoBehaviour
     [SerializeField] SaveManager saveManager;
     public void LoadLevelBtn(string levelToLoad)
     {
+        Time.timeScale = 1f;
         if(mainMenu != null)
             mainMenu.SetActive(false);
         if(saveManager != null)

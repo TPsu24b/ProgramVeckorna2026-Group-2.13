@@ -229,11 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc36fc9d701346428bfa216e81f4fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Output
-  recieversList: []
-  energyType: 0
-  reciever: {fileID: 0}
+  mode: 0
+  reciever:
+  - {fileID: 0}
   popUp: {fileID: 2702324722703600722}
   interaction: {fileID: 0}
+  active: 0
 --- !u!65 &3287643433885019773
 BoxCollider:
   m_ObjectHideFlags: 0

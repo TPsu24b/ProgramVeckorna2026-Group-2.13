@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-public class SwitchReciever : UniversalReciever
+using UnityEngine;
+public class SwitchReciever : MonoBehaviour
 {
     public bool mode = false;
-    public override void Use()
+    public virtual void Use()
     {
-        mode = true;
+        
     }
 }
 

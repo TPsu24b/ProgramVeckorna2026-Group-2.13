@@ -16,11 +16,14 @@ public class laptop : MonoBehaviour
     {
         if (inRange == true)
         {
+            interact.SetActive(true);
             if (interaction.action.WasPerformedThisFrame())
             {
-                
+                text.SetActive(true);
             }
         }
+        else
+            interact.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -32,4 +35,5 @@ public class laptop : MonoBehaviour
         interact.SetActive(false);
         inRange = false;
     }
+
 }

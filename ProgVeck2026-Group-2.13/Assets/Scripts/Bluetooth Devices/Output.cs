@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class Output : energy
 {
-    public GameObject reciever;
+    [SerializeField] GameObject reciever, popUp;
+    [SerializeField] InputActionReference interaction;
+    bool interactable;
     public override void Use()
     {
         reciever.GetComponent<SwitchReciever>().Use();
@@ -15,12 +19,29 @@ public class Output : energy
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Reciver")
-            reciever.GetComponent<SwitchReciever>().Use();
+        {
+            interactable = true;
+            popUp.SetActive(true);
+            StartCoroutine(PlayerInsideHitBox());
+        }
     }
     void OnTriggerExit(Collider other)
     {
         if(other.tag == "Reciver")
-            reciever.GetComponent<SwitchReciever>().Use();
+        {
+            interactable = false;
+            popUp.SetActive(false);
+        }
     }
+    IEnumerator PlayerInsideHitBox()
+    {
+        if(interaction.action.IsPressed())
+        {
+            reciever.GetComponent<SwitchReciever>().Use();
+        }
+        else 
+            yield return StartCoroutine(PlayerInsideHitBox());
+    }    
 }
+
 

@@ -1,4 +1,3 @@
-using Assets.Scripts.Bluetooth_Devices;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,8 +9,6 @@ public class energy : MonoBehaviour
     public List<UniversalReciever> recieversList = new List<UniversalReciever>();
 
     Output output;
-    Conducter conducter;
-    Battery battery;
 
     public enum Type {output, conducter, battery};
     public Type energyType;

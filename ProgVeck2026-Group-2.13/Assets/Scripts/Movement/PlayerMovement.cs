@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         //read the wasd input, convert it into a vector3 used for velocity later
         Vector3 temp = move.action.ReadValue<Vector3>();
         _moveDir = new Vector3(temp.x * moveSpeed, _rb.linearVelocity.y, temp.z * moveSpeed);
-        
+        //bools for cheaks in fixedUpdate
         jumpPressed = jump.action.IsPressed();
         crouchPressed = crouching.action.IsPressed();
         isSprinting = sprinting.action.IsPressed();
@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
     bool lastCrouchState;
     void FixedUpdate()
     {     
+        //if moving update your horintial rotation overtime   
         Vector3 horizontal = new Vector3(_moveDir.x, 0f, _moveDir.z);
-            
         if (horizontal.sqrMagnitude > 0.001f)
         {
             animator.SetBool("walking", true);
@@ -72,8 +72,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else 
             animator.SetBool("walking", false);
-        isGrounded = CheakGround();
         animator.SetBool("touchingGround", isGrounded);
+        
+        isGrounded = CheakGround();
         //if courching and on ground crouch
         if(lastCrouchState != crouchPressed)
         {

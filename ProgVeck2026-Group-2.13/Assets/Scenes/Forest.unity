@@ -303,7 +303,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -796,7 +796,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -1372,7 +1372,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -6900,10 +6900,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4755115304314063140, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7489119550418654164, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2098453100}
   m_SourcePrefab: {fileID: 100100000, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
 --- !u!1 &791114520
 GameObject:
@@ -7076,7 +7080,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -7238,6 +7242,33 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!1 &916871145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7489119550418654164, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
+  m_PrefabInstance: {fileID: 1617382008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &916871149
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916871145}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: 8a442c66d4bf0354fb855e2a1f1c5546, type: 3}
 --- !u!1 &995342426
 GameObject:
   m_ObjectHideFlags: 0
@@ -7296,7 +7327,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -7699,7 +7730,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -8351,7 +8382,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -13483,7 +13514,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -13861,7 +13892,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -13960,19 +13991,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.22
+      value: 4.14
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.229795
+      value: 11.207959
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.718311
+      value: 0.6896626
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6957222
+      value: 0.7241309
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalRotation.y
@@ -13984,7 +14015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 88.17
+      value: 92.793
       objectReference: {fileID: 0}
     - target: {fileID: 6716769623000129277, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -13994,10 +14025,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4755115304314063140, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7489119550418654164, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 916871149}
   m_SourcePrefab: {fileID: 100100000, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
 --- !u!1 &1640996764
 GameObject:
@@ -14564,7 +14599,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -14911,7 +14946,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
+  m_Intensity: 100
   m_Range: 40
   m_SpotAngle: 37.19602
   m_InnerSpotAngle: 0
@@ -15177,6 +15212,33 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!1 &2098453096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7489119550418654164, guid: 0c4a762508fd93841b9c984a1ad8c90b, type: 3}
+  m_PrefabInstance: {fileID: 668144831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2098453100
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098453096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: 8a442c66d4bf0354fb855e2a1f1c5546, type: 3}
 --- !u!4 &543450652130413687
 Transform:
   m_ObjectHideFlags: 0

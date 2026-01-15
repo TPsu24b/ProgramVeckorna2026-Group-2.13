@@ -16,6 +16,7 @@ public class Output : SwitchReciever
     bool interactable;
     public override void Use()
     {
+        active = !active;
         foreach(SwitchReciever reciever in reciever)
             reciever.Use();
         GetComponentInParent<DoorManager>().UpdateDoorState();

@@ -12,11 +12,13 @@ public class Output : SwitchReciever
     [SerializeField] SwitchReciever[] reciever;
     [SerializeField] GameObject popUp;
     [SerializeField] InputActionReference interaction;
+    public bool active;
     bool interactable;
     public override void Use()
     {
         foreach(SwitchReciever reciever in reciever)
             reciever.Use();
+        GetComponentInParent<DoorManager>().UpdateDoorState();
     }
     void OnTriggerEnter(Collider other)
     {

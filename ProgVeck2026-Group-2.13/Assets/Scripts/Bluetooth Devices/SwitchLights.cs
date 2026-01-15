@@ -11,7 +11,16 @@ public class SwitchLights : MonoBehaviour
     }
     void Update()
     {
-        if (greenLight)
-            Light. = false;
+        //sets lights on or off depending on if active in parent is true or false
+        if (GetComponentInParent<Output>().active)
+        {
+            light.intensity = 0;
+            greenLight.SetActive(true);
+        }
+        else
+        {
+            light.intensity = 1;
+            greenLight.SetActive(false);
+        }
     }
 }

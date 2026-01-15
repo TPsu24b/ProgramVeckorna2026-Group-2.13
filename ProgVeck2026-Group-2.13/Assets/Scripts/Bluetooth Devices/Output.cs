@@ -42,7 +42,11 @@ public class Output : SwitchReciever
         if(interaction.action.WasPerformedThisFrame() && interactable)
         {
             foreach(SwitchReciever reciever in reciever)
+            {
                 reciever.GetComponent<SwitchReciever>().Use();
+                Use();
+            }
+
 
         }
     }    

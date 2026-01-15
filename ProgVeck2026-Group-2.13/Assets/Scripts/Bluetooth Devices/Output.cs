@@ -7,40 +7,43 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Output : energy
+public class Output : SwitchReciever
 {
-    [SerializeField] GameObject reciever, popUp;
+    [SerializeField] SwitchReciever[] reciever;
+    [SerializeField] GameObject popUp;
     [SerializeField] InputActionReference interaction;
+    public bool active;
     bool interactable;
     public override void Use()
     {
-        reciever.GetComponent<SwitchReciever>().Use();
+        foreach(SwitchReciever reciever in reciever)
+            reciever.Use();
+        GetComponentInParent<DoorManager>().UpdateDoorState();
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Reciver")
+        if(other.tag == "Player")
         {
             interactable = true;
             popUp.SetActive(true);
-            StartCoroutine(PlayerInsideHitBox());
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Reciver")
+        if(other.tag == "Player")
         {
             interactable = false;
             popUp.SetActive(false);
         }
     }
-    IEnumerator PlayerInsideHitBox()
+    void Update()
     {
-        if(interaction.action.IsPressed())
+        if(interaction.action.WasPerformedThisFrame() && interactable)
         {
-            reciever.GetComponent<SwitchReciever>().Use();
+            foreach(SwitchReciever reciever in reciever)
+                reciever.GetComponent<SwitchReciever>().Use();
+
         }
-        else 
-            yield return StartCoroutine(PlayerInsideHitBox());
     }    
 }
 

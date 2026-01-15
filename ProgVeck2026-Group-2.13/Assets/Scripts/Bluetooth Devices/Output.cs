@@ -39,16 +39,8 @@ public class Output : SwitchReciever
     }
     void Update()
     {
-        if(interaction.action.WasPerformedThisFrame() && interactable)
-        {
-            foreach(SwitchReciever reciever in reciever)
-            {
-                reciever.GetComponent<SwitchReciever>().Use();
-                Use();
-            }
-
-
-        }
+        if (interaction.action.WasPerformedThisFrame() && interactable)
+            Use();
     }    
 }
 

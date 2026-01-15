@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     SphereCollider _collider;
     [Header("Animator Controller")]
     [SerializeField] private Animator animator;
+    [SerializeField]private AudioSource walkingSound;
     
     void Start()
     {
@@ -63,15 +64,18 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("walking", true);
             _lastLookDir = _moveDir.normalized;
-
+            walkingSound.Play();
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(new Vector3(_lastLookDir.x, 0, _lastLookDir.z)),
                 Time.deltaTime * 10f
             );
         }
-        else 
+        else
+        {
             animator.SetBool("walking", false);
+            walkingSound.Stop();
+        }
         animator.SetBool("touchingGround", isGrounded);
         
         isGrounded = CheakGround();

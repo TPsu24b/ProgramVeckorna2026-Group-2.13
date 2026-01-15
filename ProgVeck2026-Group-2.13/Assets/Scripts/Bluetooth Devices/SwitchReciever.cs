@@ -9,7 +9,6 @@ public class SwitchReciever : MonoBehaviour
     public bool mode = false;
     public virtual void Use()
     {
-        
     }
 }
 

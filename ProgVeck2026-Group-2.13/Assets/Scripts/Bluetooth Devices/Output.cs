@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Output : energy
+public class Output : SwitchReciever
 {
-    [SerializeField] SwitchReciever reciever;
+    [SerializeField] SwitchReciever[] reciever;
     [SerializeField] GameObject popUp;
     [SerializeField] InputActionReference interaction;
     bool interactable;
     public override void Use()
     {
-        reciever.Use();
+        foreach(SwitchReciever reciever in reciever)
+            reciever.Use();
     }
     void OnTriggerEnter(Collider other)
     {
@@ -37,7 +38,8 @@ public class Output : energy
     {
         if(interaction.action.WasPerformedThisFrame() && interactable)
         {
-            reciever.GetComponent<SwitchReciever>().Use();
+            foreach(SwitchReciever reciever in reciever)
+                reciever.GetComponent<SwitchReciever>().Use();
 
         }
     }    

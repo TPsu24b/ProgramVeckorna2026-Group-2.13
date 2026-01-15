@@ -31,7 +31,7 @@ public class EventManager : MonoBehaviour
     }
     public IEnumerator QTMannager()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         tutorial.SetActive(false);
         player.SwitchCurrentActionMap("QuickTime");
         foreach(BaseEvent quickTimeEvent in eventList.quickTimeEvents)

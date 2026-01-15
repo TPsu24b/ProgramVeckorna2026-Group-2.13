@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float moveSpeed, sprintMulti;
     [SerializeField] Vector3 _moveDir;
-    [SerializeField] bool jumpPressed, crouchPressed, isSprinting;
+    [SerializeField] bool jumpPressed, crouchPressed, isSprinting, isWalking;
     [Header("TouchingGround bool")]
     [SerializeField] LayerMask groundMask;
     [SerializeField] Transform groundCheckPoint;
@@ -53,32 +53,39 @@ public class PlayerMovement : MonoBehaviour
         jumpPressed = jump.action.IsPressed();
         crouchPressed = crouching.action.IsPressed();
         isSprinting = sprinting.action.IsPressed();
-
+        isWalking = move.action.IsPressed();    
     }
-    bool lastCrouchState;
+    bool lastCrouchState, lastWalkstate;
     void FixedUpdate()
     {     
         //if moving update your horintial rotation overtime   
         Vector3 horizontal = new Vector3(_moveDir.x, 0f, _moveDir.z);
         if (horizontal.sqrMagnitude > 0.001f)
         {
-            animator.SetBool("walking", true);
             _lastLookDir = _moveDir.normalized;
-            walkingSound.Play();
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(new Vector3(_lastLookDir.x, 0, _lastLookDir.z)),
                 Time.deltaTime * 10f
             );
         }
-        else
+        if(lastWalkstate != isWalking)
         {
-            animator.SetBool("walking", false);
-            walkingSound.Stop();
+            if(isWalking)
+            {
+                animator.SetBool("walking", true);
+                walkingSound.Play();
+            }
+            else
+            {
+                animator.SetBool("walking", false);
+                walkingSound.Stop();
+            }
+            
+            lastWalkstate = isWalking;
         }
-        animator.SetBool("touchingGround", isGrounded);
-        
         isGrounded = CheakGround();
+        animator.SetBool("touchingGround", isGrounded);
         //if courching and on ground crouch
         if(lastCrouchState != crouchPressed)
         {

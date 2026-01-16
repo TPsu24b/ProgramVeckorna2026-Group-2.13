@@ -13,10 +13,12 @@ public class Output : SwitchReciever
     [SerializeField] GameObject popUp;
     [SerializeField] InputActionReference interaction;
     [SerializeField] SwitchLights[] switchLights;
+    [SerializeField] AudioSource audioSource;
     public bool active;
     bool interactable;
     public override void Use()
     {
+        audioSource.Play();
         active = !active;
         foreach(SwitchReciever reciever in reciever)
             reciever.Use();

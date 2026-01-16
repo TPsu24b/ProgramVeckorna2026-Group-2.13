@@ -4,23 +4,17 @@ using UnityEngine;
 public class SwitchLights : MonoBehaviour
 {
     [SerializeField] GameObject greenLight;
-    Light light;
+    Light lightToToggle;
     private void Start()
     {
-        light = GetComponent<Light>();
+        lightToToggle = GetComponent<Light>();
     }
-    void Update()
+    public void UpdateLightToggle()
     {
-        //sets lights on or off depending on if active in parent is true or false
-        if (GetComponentInParent<Output>().active)
-        {
-            light.intensity = 0;
-            greenLight.SetActive(true);
-        }
-        else
-        {
-            light.intensity = 1;
-            greenLight.SetActive(false);
-        }
+        greenLight.SetActive(!greenLight.activeSelf);
+        if(greenLight.activeSelf)
+            lightToToggle.intensity = 1;
+        else 
+            lightToToggle.intensity = 0;
     }
 }

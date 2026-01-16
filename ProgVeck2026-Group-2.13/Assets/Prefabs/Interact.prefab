@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2413509131628739792
 RectTransform:
   m_ObjectHideFlags: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   - {fileID: 0}
   popUp: {fileID: 2702324722703600722}
   interaction: {fileID: 0}
+  switchLights: []
   active: 0
 --- !u!65 &3287643433885019773
 BoxCollider:

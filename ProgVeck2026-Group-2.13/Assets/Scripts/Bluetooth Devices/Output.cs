@@ -12,6 +12,7 @@ public class Output : SwitchReciever
     [SerializeField] SwitchReciever[] reciever;
     [SerializeField] GameObject popUp;
     [SerializeField] InputActionReference interaction;
+    [SerializeField] SwitchLights[] switchLights;
     public bool active;
     bool interactable;
     public override void Use()
@@ -19,14 +20,18 @@ public class Output : SwitchReciever
         active = !active;
         foreach(SwitchReciever reciever in reciever)
             reciever.Use();
-        GetComponentInParent<DoorManager>().UpdateDoorState();
+        foreach(SwitchLights light in switchLights)
+            light.UpdateLightToggle();
+        if(GetComponentInParent<DoorManager>() != null)
+            GetComponentInParent<DoorManager>().UpdateDoorState();
     }
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
             interactable = true;
-            popUp.SetActive(true);
+            if(popUp != null)
+                popUp.SetActive(true);
         }
     }
     void OnTriggerExit(Collider other)
@@ -34,7 +39,8 @@ public class Output : SwitchReciever
         if(other.tag == "Player")
         {
             interactable = false;
-            popUp.SetActive(false);
+            if(popUp != null)
+                popUp.SetActive(false);
         }
     }
     void Update()

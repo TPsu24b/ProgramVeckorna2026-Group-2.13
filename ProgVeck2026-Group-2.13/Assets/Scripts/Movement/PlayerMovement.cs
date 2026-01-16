@@ -1,7 +1,5 @@
 using System;
-using NUnit.Framework;
-using Unity.Burst.Intrinsics;
-using UnityEditor.Animations;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -74,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             if(isWalking)
             {
                 animator.SetBool("walking", true);
+                walkingSound.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 walkingSound.Play();
             }
             else

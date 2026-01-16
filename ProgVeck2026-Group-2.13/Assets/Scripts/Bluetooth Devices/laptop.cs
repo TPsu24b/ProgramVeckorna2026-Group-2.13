@@ -3,36 +3,23 @@ using UnityEngine.InputSystem;
 
 public class laptop : MonoBehaviour
 {
-    [SerializeField] GameObject interact, text;
-    bool inRange = false, isOpen;
+    [SerializeField] GameObject loadingIcon, popUp;
+    bool inRange = false;
     [SerializeField] InputActionReference interaction;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (inRange == true)
+        if(inRange && interaction.action.WasPerformedThisFrame())
         {
-            interact.SetActive(true);
-            if (interaction.action.WasPerformedThisFrame())
-            {
-                text.SetActive(true);
-            }
+            loadingIcon.SetActive(!inRange);
+            popUp.SetActive(inRange);
         }
-        else
-            interact.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
-        interact.SetActive(true);
         inRange = true;
     }
     private void OnTriggerExit(Collider other)
     {
-        interact.SetActive(false);
         inRange = false;
     }
 

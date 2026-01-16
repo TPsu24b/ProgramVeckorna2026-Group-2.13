@@ -1,18 +1,26 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SceneTrigger : MonoBehaviour
 {
     [SerializeField] private ASyncLoader sceneLoader;
-    [SerializeField] SaveManager saveManager;
     public string sceneToLoad;
+    public bool delay;
+    public float timeDelay;
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            if(saveManager != null)
-                saveManager.SaveData(sceneToLoad);
-            sceneLoader.LoadLevelBtn(sceneToLoad);
+            if(delay) 
+                StartCoroutine(DelayLoad());
+            else
+                sceneLoader.LoadLevelBtn(sceneToLoad);
         }
+    }
+    IEnumerator DelayLoad()
+    {
+        yield return new WaitForSeconds(timeDelay);
+        sceneLoader.LoadLevelBtn(sceneToLoad);
     }
 }

@@ -13,8 +13,8 @@ public class SwitchLights : MonoBehaviour
     {
         greenLight.SetActive(!greenLight.activeSelf);
         if(greenLight.activeSelf)
-            lightToToggle.intensity = 1;
-        else 
             lightToToggle.intensity = 0;
+        else 
+            lightToToggle.intensity = 1;
     }
 }

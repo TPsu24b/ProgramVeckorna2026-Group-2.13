@@ -10,14 +10,11 @@ public class ASyncLoader : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private RectTransform loadingAnim;
     [SerializeField] private int spinSpeed;
-    [SerializeField] SaveManager saveManager;
     public void LoadLevelBtn(string levelToLoad)
     {
         Time.timeScale = 1f;
         if(mainMenu != null)
             mainMenu.SetActive(false);
-        if(saveManager != null)
-            saveManager.SaveData(levelToLoad);
         loadingScreen.SetActive(true);
 
         StartCoroutine(LoadLevelASync(levelToLoad));

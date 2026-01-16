@@ -21,6 +21,8 @@ public class laptop : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         inRange = false;
+        loadingIcon.SetActive(!inRange);
+        popUp.SetActive(inRange);
     }
 
 }

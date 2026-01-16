@@ -658,10 +658,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thanks For Playing the Demo of Nescio!\n\nMade by Ferdinand II Productions
-    (Group 2.13)\nProduction was extra complicated due to us being a team of 3 Programmers\n\nAlex
-    Holmsted - Project Head, Constructor\nTheo Palm - Head Programmer\nM\xE4rta Str\xF6mberg
-    Karlson - Head Graphics\n\nAnd You, the Player"
+  m_text: "Thank You For Playing the Demo of Nescio!\n\nMade by Ferdinand II Productions
+    (Group 2.13) comprised of the following members: \n\nAlex Holmsted - Project
+    Head, Constructor\nTheo Palm - Head Programmer\nM\xE4rta Str\xF6mberg Karlson
+    - Head Graphics\nAll belonging to class SU 24b"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 public class SwitchLights : MonoBehaviour
 {
     [SerializeField] GameObject greenLight;
-    Light lightToToggle;
+    [SerializeField] Light lightToToggle;
     private void Start()
     {
         lightToToggle = GetComponent<Light>();

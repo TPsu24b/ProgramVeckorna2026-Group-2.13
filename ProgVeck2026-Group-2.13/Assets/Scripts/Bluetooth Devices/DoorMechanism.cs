@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class DoorMechanism : SwitchReciever

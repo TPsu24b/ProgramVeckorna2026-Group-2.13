@@ -67,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
                 Time.deltaTime * 10f
             );
         }
+        isGrounded = CheakGround();
+        animator.SetBool("touchingGround", isGrounded);
         if(lastWalkstate != isWalking)
         {
             if(isWalking)
@@ -83,8 +85,6 @@ public class PlayerMovement : MonoBehaviour
             
             lastWalkstate = isWalking;
         }
-        isGrounded = CheakGround();
-        animator.SetBool("touchingGround", isGrounded);
         //if courching and on ground crouch
         if(lastCrouchState != crouchPressed)
         {

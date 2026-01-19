@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   greenLight: {fileID: 3786388279227064170}
+  lightToToggle: {fileID: 0}
 --- !u!1 &2088777723795654458
 GameObject:
   m_ObjectHideFlags: 0

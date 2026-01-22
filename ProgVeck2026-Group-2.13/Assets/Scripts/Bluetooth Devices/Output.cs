@@ -11,10 +11,10 @@ public class Output : SwitchReciever
 {
     [SerializeField] SwitchReciever[] reciever;
     [SerializeField] GameObject popUp;
-    [SerializeField] InputActionReference interaction;
     [SerializeField] SwitchLights[] switchLights;
     [SerializeField] AudioSource audioSource;
     public bool active;
+    
     bool interactable;
     public override void Use()
     {
@@ -34,6 +34,7 @@ public class Output : SwitchReciever
             interactable = true;
             if(popUp != null)
                 popUp.SetActive(true);
+            
         }
     }
     void OnTriggerExit(Collider other)
@@ -44,12 +45,7 @@ public class Output : SwitchReciever
             if(popUp != null)
                 popUp.SetActive(false);
         }
-    }
-    void Update()
-    {
-        if (interaction.action.WasPerformedThisFrame() && interactable)
-            Use();
-    }    
+    } 
 }
 
 

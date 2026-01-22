@@ -7,23 +7,32 @@ using UnityEngine.InputSystem;
 public class PlayerCharge : MonoBehaviour
 {
     [SerializeField] private InputActionReference chargeInput;
-    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private LayerMask layerMask;
     private bool lastChargeState;
-    private float timeElapsed, chargeTime;
-    [SerializeField] private float _radius, reach;
+    private float timeElapsed;
+    [SerializeField] private float _radius, reach, chargeTime;
     void Update()
     {
         bool charging = chargeInput.action.IsPressed();
-        if(charging == lastChargeState)
+        if(charging != lastChargeState)
         {
             timeElapsed += Time.deltaTime;
-            if(timeElapsed >= chargeTime)
-                ShootProjectile();
         }
-        else
+        else 
         {
-            
+            if(timeElapsed >= chargeTime && chargeInput.action.WasReleasedThisDynamicUpdate())
+            {
+                ShootProjectile();
+                timeElapsed = 0;
+                Debug.Log($"{this}: Shoot");
+            }
+            else if(chargeInput.action.WasReleasedThisDynamicUpdate())
+            {
+                ActivateNearbyOutput();
+                timeElapsed = 0;
+                Debug.Log($"{this}: Manual");
+            }
+            charging = lastChargeState;
         }
     }
     void ActivateNearbyOutput()
@@ -35,8 +44,15 @@ public class PlayerCharge : MonoBehaviour
     void ShootProjectile()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach, layerMask);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.orange);
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach, layerMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.orange);
+            hit.collider.gameObject.GetComponent<Output>().Use();
+        }
+        else 
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.orange);
+        }
     }
     Output[] GetNearByOutputs(float radius)
     {
@@ -49,5 +65,11 @@ public class PlayerCharge : MonoBehaviour
         foreach(Collider colliderToGet in c)
             outputs.Add(colliderToGet.GetComponent<Output>());
         return outputs.ToArray();
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.orange;
+        Gizmos.DrawRay(transform.position, transform.TransformDirection(Vector3.forward));
+        Gizmos.DrawWireSphere(transform.position, _radius);
     }
 }

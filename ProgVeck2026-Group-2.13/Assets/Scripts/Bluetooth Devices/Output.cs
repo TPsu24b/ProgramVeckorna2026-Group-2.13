@@ -15,7 +15,6 @@ public class Output : SwitchReciever
     [SerializeField] AudioSource audioSource;
     public bool active;
     
-    bool interactable;
     public override void Use()
     {
         audioSource.Play();
@@ -31,7 +30,6 @@ public class Output : SwitchReciever
     {
         if(other.tag == "Player")
         {
-            interactable = true;
             if(popUp != null)
                 popUp.SetActive(true);
             
@@ -41,7 +39,6 @@ public class Output : SwitchReciever
     {
         if(other.tag == "Player")
         {
-            interactable = false;
             if(popUp != null)
                 popUp.SetActive(false);
         }

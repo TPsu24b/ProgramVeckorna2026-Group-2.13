@@ -1,28 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class laptop : MonoBehaviour
+public class laptop : Output
 {
-    [SerializeField] GameObject loadingIcon, popUp;
+    [SerializeField] GameObject loadingIcon;
     bool inRange = false;
     [SerializeField] InputActionReference interaction;
-    void Update()
+    public override void Use()
     {
-        if(inRange && interaction.action.WasPerformedThisFrame())
-        {
-            loadingIcon.SetActive(!inRange);
-            popUp.SetActive(inRange);
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        inRange = true;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        inRange = false;
-        loadingIcon.SetActive(!inRange);
-        popUp.SetActive(inRange);
+        loadingIcon.SetActive(!loadingIcon.activeSelf);
+        popUp.SetActive(!popUp.activeSelf);
     }
 
 }

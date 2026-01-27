@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.iOS;
 
 public class PlayerCharge : MonoBehaviour
 {
     [SerializeField] private InputActionReference chargeInput;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private ParticleSystem ps;
     private bool lastChargeState;
     private float timeElapsed;
     [SerializeField] private float _radius, reach, chargeTime;
@@ -22,14 +25,14 @@ public class PlayerCharge : MonoBehaviour
         {
             if(timeElapsed >= chargeTime && chargeInput.action.WasReleasedThisDynamicUpdate())
             {
-                ShootProjectile();
                 timeElapsed = 0;
+                ShootProjectile();
                 Debug.Log($"{this}: Shoot");
             }
             else if(chargeInput.action.WasReleasedThisDynamicUpdate())
             {
-                ActivateNearbyOutput();
                 timeElapsed = 0;
+                ActivateNearbyOutput();
                 Debug.Log($"{this}: Manual");
             }
             charging = lastChargeState;
@@ -38,8 +41,8 @@ public class PlayerCharge : MonoBehaviour
     void ActivateNearbyOutput()
     {
         Output[] outputs = GetNearByOutputs(_radius);
-        for(int i = 0; i < outputs.Length; i++)
-            outputs[i].Use();
+        foreach(Output output in outputs)
+            output.Use();
     }
     void ShootProjectile()
     {
@@ -47,7 +50,9 @@ public class PlayerCharge : MonoBehaviour
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.orange);
-            hit.collider.gameObject.GetComponent<Output>().Use();
+            Output output = hit.collider.gameObject.GetComponent<Output>();
+            if(output != null)
+                output.Use();
         }
         else 
         {

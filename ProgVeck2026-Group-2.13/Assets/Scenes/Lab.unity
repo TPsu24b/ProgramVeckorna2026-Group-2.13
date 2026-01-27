@@ -16865,7 +16865,7 @@ GameObject:
   - component: {fileID: 600200295}
   - component: {fileID: 600200296}
   - component: {fileID: 600200297}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door
   m_TagString: Reciver
   m_Icon: {fileID: 0}
@@ -17036,7 +17036,7 @@ GameObject:
   - component: {fileID: 638870147}
   - component: {fileID: 638870149}
   - component: {fileID: 638870148}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

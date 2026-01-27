@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 public class Output : SwitchReciever
 {
     [SerializeField] SwitchReciever[] reciever;
-    [SerializeField] GameObject popUp;
+    [SerializeField] protected GameObject popUp;
     [SerializeField] SwitchLights[] switchLights;
     [SerializeField] AudioSource audioSource;
     public bool active;

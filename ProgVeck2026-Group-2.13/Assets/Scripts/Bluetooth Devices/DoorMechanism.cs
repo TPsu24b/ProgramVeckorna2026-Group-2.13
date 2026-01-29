@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class DoorMechanism : SwitchReciever
+public class DoorMechanism : Output
 {
     [SerializeField] Transform doorLeft, doorRight;
     [SerializeField] float startZOffset, endZOffset, timeToOpen, moveDistance;
     private float elapsedTime;
-    [SerializeField] private bool doorOpen = false, active;
+    [SerializeField] private bool doorOpen = false;
     [SerializeField] private float startZ, endZ;
     public override void Use()
     {

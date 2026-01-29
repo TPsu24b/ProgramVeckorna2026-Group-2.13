@@ -10,12 +10,11 @@ using UnityEngine.InputSystem;
 public class Output : SwitchReciever
 {
     [SerializeField] SwitchReciever[] reciever;
-    [SerializeField] GameObject popUp;
-    [SerializeField] InputActionReference interaction;
+    [SerializeField] protected GameObject popUp;
     [SerializeField] SwitchLights[] switchLights;
     [SerializeField] AudioSource audioSource;
     public bool active;
-    bool interactable;
+    
     public override void Use()
     {
         audioSource.Play();
@@ -31,25 +30,19 @@ public class Output : SwitchReciever
     {
         if(other.tag == "Player")
         {
-            interactable = true;
             if(popUp != null)
                 popUp.SetActive(true);
+            
         }
     }
     void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player")
         {
-            interactable = false;
             if(popUp != null)
                 popUp.SetActive(false);
         }
-    }
-    void Update()
-    {
-        if (interaction.action.WasPerformedThisFrame() && interactable)
-            Use();
-    }    
+    } 
 }
 
 

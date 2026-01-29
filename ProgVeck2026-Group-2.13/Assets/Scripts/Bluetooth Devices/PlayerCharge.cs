@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.iOS;
 
@@ -14,24 +13,34 @@ public class PlayerCharge : MonoBehaviour
     private bool lastChargeState;
     private float timeElapsed;
     [SerializeField] private float _radius, reach, chargeTime;
+    void Awake()
+    {
+                        ps.Stop();
+    }
     void Update()
     {
         bool charging = chargeInput.action.IsPressed();
         if(charging != lastChargeState)
         {
             timeElapsed += Time.deltaTime;
+            if(!ps.isPlaying)
+                ps.Play();
+            var emission = ps.emission;
+            emission.rateOverTime = 5f * timeElapsed;
         }
         else 
         {
             if(timeElapsed >= chargeTime && chargeInput.action.WasReleasedThisDynamicUpdate())
             {
                 timeElapsed = 0;
+                ps.Stop();
                 ShootProjectile();
                 Debug.Log($"{this}: Shoot");
             }
             else if(chargeInput.action.WasReleasedThisDynamicUpdate())
             {
                 timeElapsed = 0;
+                ps.Stop();
                 ActivateNearbyOutput();
                 Debug.Log($"{this}: Manual");
             }

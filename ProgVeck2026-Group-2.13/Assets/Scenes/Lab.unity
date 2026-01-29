@@ -6567,6 +6567,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386700317}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!198 &399752586 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1490465021432156596, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+  m_PrefabInstance: {fileID: 925729217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &400849873
 GameObject:
   m_ObjectHideFlags: 0
@@ -16904,6 +16909,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorMechanism
   mode: 0
+  reciever: []
+  popUp: {fileID: 0}
+  switchLights: []
+  audioSource: {fileID: 0}
+  active: 0
   doorLeft: {fileID: 204584068}
   doorRight: {fileID: 1859027336}
   startZOffset: 1.6
@@ -16911,7 +16921,6 @@ MonoBehaviour:
   timeToOpen: 1
   moveDistance: 2
   doorOpen: 0
-  active: 0
   startZ: 0
   endZ: 0
 --- !u!65 &600200297
@@ -17074,8 +17083,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87072b9690ee2bf4eb7cb17ae29aa35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  loadingIcon: {fileID: 1181160569}
+  mode: 0
+  reciever: []
   popUp: {fileID: 1242991766}
+  switchLights: []
+  audioSource: {fileID: 0}
+  active: 0
+  loadingIcon: {fileID: 1181160569}
   interaction: {fileID: 464450369}
 --- !u!65 &638870149
 BoxCollider:
@@ -23110,6 +23124,10 @@ PrefabInstance:
       value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6056466858000249962, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
+      propertyPath: ps
+      value: 
+      objectReference: {fileID: 399752586}
+    - target: {fileID: 6056466858000249962, guid: 2e37ef3c92e19554f9ec75e619ef5cad, type: 3}
       propertyPath: chargeInput
       value: 
       objectReference: {fileID: 1330805798}
@@ -24880,6 +24898,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorMechanism
   mode: 0
+  reciever: []
+  popUp: {fileID: 0}
+  switchLights: []
+  audioSource: {fileID: 0}
+  active: 0
   doorLeft: {fileID: 1879907075}
   doorRight: {fileID: 68957156}
   startZOffset: 1.6
@@ -24887,7 +24910,6 @@ MonoBehaviour:
   timeToOpen: 1
   moveDistance: 2
   doorOpen: 0
-  active: 0
   startZ: 0
   endZ: 0
 --- !u!1 &1281050708
